@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <title>Maya og Eskilds web-applikasjon</title>
@@ -8,24 +7,39 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
 </head>
-
 <body>
-<div id="app">
-    <table>
-        <tr>
-            <th>Name</th>
-            <th>Task</th>
-            <th>Email</th>
-        </tr>
-        <tr v-for="member in members">
-            <td>{{member.name}}</td>
-            <td>{{member.task}}</td>
-            <td>{{member.email}}</td>
-        </tr>
-    </table>
+<h1>Project view</h1>
 
-</div>
-<script src="./app.js"></script>
+<div id="projectMembers"></div>
+<div id="app">
+
+<div>
+    <a href="newWorker.html">Add new project member</a>
+
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Task</th>
+                <th>Email</th>
+            </tr>
+            <tr v-for="member in members">
+                <td>{{member.name}}</td>
+                <td>{{member.task}}</td>
+                <td>{{member.email}}</td>
+            </tr>
+        </table>
+    </div>
+
+    </div>
 </body>
+<script>
+    fetch("/projectMembers")
+        .then(function(response) {
+            return response.text();
+        }).then(function(text) {
+        document.getElementById("projectMembers").innerHTML = text;
+    });
+</script>
+<script src="./app.js"></script>
 
 </html>

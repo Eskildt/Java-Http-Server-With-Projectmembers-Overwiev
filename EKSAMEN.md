@@ -120,14 +120,14 @@ body {
 ## Vedlegg: Sjekkliste for innlevering
 
 * [ ] Dere har registrert link til GitHub repository i Wiseflow
-* [ ] Koden er sjekket inn på github.com/Westerdals-repository
-* [ ] GitHub repository er private, men delt med gruppen dere gjør hverandrevurdering på
-* [ ] Dere har mottatt minst 2 positive og 2 korrektive GitHub issues i github repository fra en annen gruppe
+* [x] Koden er sjekket inn på github.com/Westerdals-repository
+* [/] GitHub repository er private, men delt med gruppen dere gjør hverandrevurdering på
+* [/] Dere har mottatt minst 2 positive og 2 korrektive GitHub issues i github repository fra en annen gruppe
 * [ ] Dere har committed kode med begge prosjektdeltagernes GitHub konto (alternativt: README beskriver arbeidsform)
 
 ### README.md
 
-* [ ] `README.md` inneholder en korrekt link til Travis CI
+* [x] `README.md` inneholder en korrekt link til Travis CI
 * [ ] `README.md` beskriver prosjektets funksjonalitet, hvordan man bygger det og hvordan man kjører det 
 * [ ] `README.md` beskriver eventuell ekstra leveranse utover minimum
 * [ ] `README.md` inneholder link til en diagram som viser datamodellen
@@ -135,19 +135,19 @@ body {
 
 ### Koden
 
-* [ ] `mvn package` bygger en executable jar-fil
-* [ ] Koden inneholder et godt sett med tester
-* [ ] `java -jar target/...jar` (etter `mvn package`) lar bruker legge til å liste ut data fra databasen
-* [ ] Programmet leser `dataSource.url`, `dataSource.username` og `dataSource.password` fra `task-manager.properties` for å connecte til databasen
-* [ ] Programmet bruker Flywaydb for å sette opp databaseskjema
-* [ ] Server skriver nyttige loggmeldinger, inkludert informasjon om hvilken URL den kjører på ved oppstart
-* [ ] `.gitignore` inneholder nødvendige filer
+* [x] `mvn package` bygger en executable jar-fil
+* [x] Koden inneholder et godt sett med tester
+* [x] `java -jar target/...jar` (etter `mvn package`) lar bruker legge til å liste ut data fra databasen
+* [x] Programmet leser `dataSource.url`, `dataSource.username` og `dataSource.password` fra `task-manager.properties` for å connecte til databasen
+* [x] Programmet bruker Flywaydb for å sette opp databaseskjema
+* [/] Server skriver nyttige loggmeldinger, inkludert informasjon om hvilken URL den kjører på ved oppstart
+* [x] `.gitignore` inneholder nødvendige filer
 
-### Funksjonalitet
+### Funksjonalitet [/]
 
-* [ ] Programmet kan liste prosjektdeltagere fra databasen
-* [ ] Programmet lar bruker opprette nye prosjektdeltagere i databasen
-* [ ] Programmet kan opprette og liste prosjektoppgaver fra databasen
+* [x] Programmet kan liste prosjektdeltagere fra databasen
+* [x] Programmet lar bruker opprette nye prosjektdeltagere i databasen
+* [x] Programmet kan opprette og liste prosjektoppgaver fra databasen
 
 
 ## Vedlegg: Mulighet for ekstrapoeng
