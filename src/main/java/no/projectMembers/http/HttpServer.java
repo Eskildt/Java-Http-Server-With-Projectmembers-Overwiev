@@ -1,7 +1,5 @@
 package no.projectMembers.http;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import taskManager.MemberDB;
 
 import java.io.File;
@@ -14,8 +12,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class HttpServer {
-
-    private static final org.slf4j.Logger Logger = LoggerFactory.getLogger(HttpServer.class);
 
     private int port;
     private ServerSocket serverSocket;
@@ -40,9 +36,7 @@ public class HttpServer {
 
     public void start() {
         new Thread(this::run).start();
-        Logger.info("Started on http://localhost:{}", getPort());
     }
-
 
     public void run() {
 
@@ -55,7 +49,6 @@ public class HttpServer {
 
                 HttpServerRequest request = new HttpServerRequest(socket.getInputStream());
                 String requestLine = request.getStartLine();
-                Logger.debug("Handling request: {}", requestLine);
 
                 System.out.println(requestLine);
                 String requestTarget;
