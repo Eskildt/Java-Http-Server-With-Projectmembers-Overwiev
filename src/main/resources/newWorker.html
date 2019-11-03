@@ -16,5 +16,15 @@
 <div>
     <a href=".">Return to front page</a>
 </div>
+
 </body>
+
+<script>
+fetch("/api/members")
+    .then(function(result) {
+        return result.text();
+    }).then(function (text) {
+    document.getElementById("members").innerHTML = text;
+});
+</script>
 </html>

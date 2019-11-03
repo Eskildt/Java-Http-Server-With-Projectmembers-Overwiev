@@ -1,4 +1,4 @@
-package taskManager;
+package no.projectMembers.taskManager;
 
 import com.google.gson.Gson;
 import no.projectMembers.http.HttpServer;

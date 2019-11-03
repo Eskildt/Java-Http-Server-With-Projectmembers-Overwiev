@@ -29,7 +29,7 @@
             <configuration>
               <transformers>
                 <transformer>
-                  <mainClass>taskManager.MemberDB</mainClass>
+                  <mainClass>no.projectMembers.taskManager.MemberDB</mainClass>
                 </transformer>
               </transformers>
             </configuration>

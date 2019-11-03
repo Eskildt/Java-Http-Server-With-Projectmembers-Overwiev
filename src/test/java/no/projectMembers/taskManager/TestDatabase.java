@@ -1,4 +1,4 @@
-package taskManager;
+package no.projectMembers.taskManager;
 
 import org.flywaydb.core.Flyway;
 import org.h2.jdbcx.JdbcDataSource;

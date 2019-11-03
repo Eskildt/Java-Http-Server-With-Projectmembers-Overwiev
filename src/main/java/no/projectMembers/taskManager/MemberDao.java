@@ -1,4 +1,4 @@
-package taskManager;
+package no.projectMembers.taskManager;
 
 import javax.sql.DataSource;
 import java.sql.Connection;

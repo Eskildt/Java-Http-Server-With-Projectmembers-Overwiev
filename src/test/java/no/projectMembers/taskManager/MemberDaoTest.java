@@ -1,4 +1,4 @@
-package taskManager;
+package no.projectMembers.taskManager;
 
 import org.assertj.core.api.Assertions;
 import org.h2.jdbcx.JdbcDataSource;
