@@ -1,15 +1,15 @@
 package no.projectMembers.http;
 
-import no.projectMembers.taskManager.MemberDB;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+
+import static no.projectMembers.http.HttpMessage.readHeaders;
 
 public class HttpServer {
 
@@ -40,39 +40,71 @@ public class HttpServer {
     }
 
     public void start() {
-        new Thread(this::run).start();
+        new Thread(() -> run()).start();
         Logger.info("Started on http://localhost:{}", getPort());
     }
 
 
     public void run() {
-
-        boolean keepRunning = true;
-
-        while(keepRunning) {
-
+        while(true) {
             try {
                 Socket socket = serverSocket.accept();
 
-                HttpServerRequest request = new HttpServerRequest(socket.getInputStream());
-                String requestLine = request.getStartLine();
+                String requestLine = HttpMessage.readLine(socket.getInputStream());
                 Logger.debug("Handling request: {}", requestLine);
+                Map<String, String> headers = readHeaders(socket.getInputStream());
+                String body = HttpMessage.readBody(headers, socket.getInputStream());
 
-                System.out.println(requestLine);
-                String requestTarget;
-                if(requestLine.split(" ").length > 1) {
-                     requestTarget = requestLine.split(" ")[1];
-                } else {requestTarget = "/";}
-
+                String requestAction = requestLine.split(" ")[0];
+                String requestTarget = requestLine.split(" ")[1];
                 int questionPos = requestTarget.indexOf('?');
                 String requestPath = questionPos == -1 ? requestTarget : requestTarget.substring(0, questionPos);
                 Map<String, String> query = getQueryParameters(requestTarget);
 
-                if(requestPath.equals("/")) {
-                    requestPath = "/index.html";
-                }
+                controllers.getOrDefault(requestPath, defaultController)
+                        .handle(requestAction, requestPath, query, body, socket.getOutputStream());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
+    static Map<String, String> getQueryParameters(String requestTarget) {
+        int questionPos = requestTarget.indexOf('?');
+        if (questionPos > 0){
+            String query = requestTarget.substring(questionPos + 1);
+            return parseQueryString(query);
+        }
+        return new HashMap<>();
+    }
 
+    public static Map<String, String> parseQueryString(String query) {
+        Map<String, String> parameters = new HashMap<>();
+        for (String parameter : query.split("&")) {
+            int equalsPos = parameter.indexOf('=');
+            String parameterName = parameter.substring(0, equalsPos);
+            String parameterValue = parameter.substring(equalsPos + 1);
+            parameters.put(parameterName, parameterValue);
+
+        }
+        return parameters;
+    }
+
+    public int getPort() {
+        return serverSocket.getLocalPort();
+    }
+
+    public void setFileLocation(String fileLocation) {
+        this.fileLocation = fileLocation;
+    }
+
+    public String getFileLocation(){ return fileLocation; }
+
+    public void addController(String path, HttpController controller) {
+        controllers.put(path, controller);
+    }
+}
+/*
                 switch (requestPath) {
                     case "/stop":
                         System.exit(0);
@@ -96,52 +128,4 @@ public class HttpServer {
                                 (location != null ? "Location: " + location + "\r\n" : "") + "\r\n" + body).getBytes());
 
                 }
-                        controllers.getOrDefault(requestPath, defaultController)
-                                .handle(requestPath, query, socket.getOutputStream());
-
-
-            } catch (IOException | SQLException e) {
-                e.printStackTrace();
-            }
-
-        }
-    }
-
-    private Map<String, String> getQueryParameters(String requestLine) {
-        String requestTarget;
-        if(requestLine.split(" ").length > 1) {
-            requestTarget = requestLine.split(" ")[1];
-        } else {requestTarget = "/";}
-        Map<String, String> parameters = new HashMap<>();
-        int questionPos = requestTarget.indexOf('?');
-        if (questionPos != -1){
-            String query = requestTarget.substring(questionPos + 1);
-            for (String parameter : query.split("&")) {
-
-                int equalsPos = parameter.indexOf('=');
-                String parameterName = parameter.substring(0, equalsPos);
-                String parameterValue = parameter.substring(equalsPos + 1);
-
-                parameters.put(parameterName, parameterValue);
-
-            }
-
-        }
-        return parameters;
-    }
-
-    public int getPort() {
-        return serverSocket.getLocalPort();
-    }
-
-    public void setFileLocation(String fileLocation) {
-        this.fileLocation = fileLocation;
-    }
-
-    public String getFileLocation(){ return fileLocation; }
-
-    public void addController(String path, HttpController controller) {
-        controllers.put(path, controller);
-    }
-}
-
+*/

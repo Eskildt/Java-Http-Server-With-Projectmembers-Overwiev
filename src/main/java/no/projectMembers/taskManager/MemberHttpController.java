@@ -1,6 +1,7 @@
 package no.projectMembers.taskManager;
 
 import no.projectMembers.http.HttpController;
+import no.projectMembers.http.HttpServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,8 +21,15 @@ public class MemberHttpController implements HttpController {
     }
 
     @Override
-    public void handle(String requestPath, Map<String, String> query, OutputStream outputStream) throws IOException {
+    public void handle(String requestAction, String requestPath, Map<String, String> query, String requestBody, OutputStream outputStream) throws IOException {
         try {
+        if(requestAction.equals("POST")){
+            query = HttpServer.parseQueryString(requestBody);
+            Member member = new Member();
+            member.setName(query.get("memberName"));
+            memberDao.insert(member);
+            return;
+        }
             String statusCode = "200";
             String location = "text/html";
             String body = getBody();

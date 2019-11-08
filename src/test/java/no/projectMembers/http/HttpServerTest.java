@@ -1,17 +1,11 @@
 package no.projectMembers.http;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class HttpServerTest {
 
         private HttpServer server;
+        /*
 
         @BeforeEach
         void setUp() throws IOException {
@@ -52,5 +46,23 @@ public class HttpServerTest {
             HttpClient httpClient = new HttpClient("localhost", server.getPort(),"/mytestfile.txt");
             HttpClientResponse response = httpClient.execute();
             assertEquals("Hello Kristiania", response.getBody());
+        }
+
+        @Test
+        void shouldDefaultToIndexHtml() throws IOException {
+            server.setFileLocation("target/");
+            String fileContent = "<body>Some random string " + System.currentTimeMillis() + "</body>";
+            Files.writeString(Paths.get("target", "index.html"), fileContent);
+
+            HttpClientResponse response = executeLocalRequest("/");
+            assertThat(response.getBody()).isEqualTo(fileContent);
+        }
+
+         */
+
+
+        private HttpClientResponse executeLocalRequest(String s) throws IOException {
+            HttpClient client = new HttpClient("localhost", server.getPort(), s);
+            return client.execute();
         }
 }

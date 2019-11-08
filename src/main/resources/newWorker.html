@@ -7,10 +7,26 @@
 </head>
 <body>
 <h1>Add project member</h1>
-
 <form method="POST" action="/members">
     <label>Member name: <input type="text" name="full_name" /></label>
     <button>Add</button>
+</form>
+
+<form action="/api/products" method="post">
+    <label>
+        Member name:
+        <input type="text" name="memberName"/>
+    </label>
+    <label>
+        Project:
+        <input type="text" name="project">
+    </label>
+
+    <label>
+        Email:
+        <input type="text" name="email">
+    </label>
+
 </form>
 
 <div>

@@ -12,7 +12,7 @@ class FileHttpController implements HttpController {
     public FileHttpController(HttpServer httpServer) { this.httpServer = httpServer; }
 
     @Override
-    public void handle(String requestPath, Map<String, String> query, OutputStream outputStream) throws IOException {
+    public void handle(String requestPath, String path, Map<String, String> query, String body, OutputStream outputStream) throws IOException {
         File file = new File(httpServer.getFileLocation() + requestPath);
         if(file.isFile()) {
             outputStream.write(("HTTP/1.1 200 OK\r\n" +
