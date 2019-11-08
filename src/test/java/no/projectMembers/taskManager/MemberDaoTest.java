@@ -1,7 +1,9 @@
 package no.projectMembers.taskManager;
 
 import org.assertj.core.api.Assertions;
+import org.flywaydb.core.Flyway;
 import org.h2.jdbcx.JdbcDataSource;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
@@ -11,7 +13,22 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class MemberDaoTest {
 
+    private static Random random = new Random();
     JdbcDataSource dataSource = TestDatabase.testDataSource();
+    private MemberDao dao;
+
+    @BeforeEach
+    void setUp(){
+        dataSource = createDataSource();
+        dao = new MemberDao(dataSource);
+    }
+
+    static JdbcDataSource createDataSource() {
+        JdbcDataSource dataSource = new JdbcDataSource();
+        dataSource.setUrl("jdbc:h2:mem:memberTest;DB_CLOSE_DELAY=-1");
+        Flyway.configure().dataSource(dataSource).load().migrate();
+        return dataSource;
+    }
 
     @Test
     public void shouldListInsertedMembers() throws SQLException {
@@ -30,7 +47,7 @@ public class MemberDaoTest {
         assertThat(memberDao.retrieve(id)).isEqualToComparingFieldByField(member);
     }
 
-    private Member sampleMember(){
+    static Member sampleMember(){
         Member member = new Member();
         member.setName(sampleMemberName());
         member.setTask(sampleRandomTask());
@@ -38,14 +55,14 @@ public class MemberDaoTest {
         return member;
     }
 
-    private String sampleMemberName(){
+    private static String sampleMemberName(){
         String[] alternatives = {
                 "Bjørg", "Bjarne", "Bjarte", "Brage"
         };
         return alternatives[new Random().nextInt(alternatives.length)];
     }
 
-    private String sampleRandomTask(){
+    private static String sampleRandomTask(){
         String[] alternatives = {
                 "Trene", "Programmere", "Lage mat", "Se på TV"
         };
@@ -53,11 +70,12 @@ public class MemberDaoTest {
         return alternatives[new Random().nextInt(alternatives.length)];
     }
 
-    private String sampleEmail(){
+    private static String sampleEmail(){
         String[] alternatives ={
                 "bjørg@mail.com", "bjarne@mail.com", "bjarte@yahoo.com", "brage@hotmail.com"
         };
         return alternatives[new Random().nextInt(alternatives.length)];
     }
 
+    private static String pickOne(String[] alternatives){return alternatives[random.nextInt(alternatives.length)];}
 }

@@ -31,6 +31,7 @@ public class MemberDao extends AbstractDao<Member> {
     @Override
     protected Member readObject(ResultSet resultset) throws SQLException {
         Member member = new Member();
+        member.setId(resultset.getInt("id"));
         member.setName(resultset.getString("name"));
         member.setTask(resultset.getString("task"));
         member.setEmail(resultset.getString("email"));

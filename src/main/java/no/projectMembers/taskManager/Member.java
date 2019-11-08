@@ -7,6 +7,7 @@ public class Member {
     public String task;
     public String email;
     private String name;
+    public int id;
 
 
     public void setName(String name) {
@@ -19,7 +20,7 @@ public class Member {
 
     @Override
     public String toString(){
-        return "{Member: " + name + " Project: " + task + " Email: " + email + "}";
+        return "{ID: " + id + "Member: " + name + " Project: " + task + " Email: " + email + "}";
     }
 
     @Override
@@ -49,5 +50,12 @@ public class Member {
 
     public String getEmail() {
         return email;
+    }
+    public void setId(int id){
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 }
