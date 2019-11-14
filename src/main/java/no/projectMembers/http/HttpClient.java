@@ -40,7 +40,7 @@ public class HttpClient {
         }
 
         String headerString = headers.entrySet().stream()
-                .map(e-> e.getKey() + ": " + e.getValue())
+                .map(e-> e.getKey() + " : " + e.getValue())
                 .collect(Collectors.joining("\r\n"));
 
 

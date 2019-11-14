@@ -1,18 +1,7 @@
 package no.projectMembers.taskManager;
 
-import com.google.gson.Gson;
-import no.projectMembers.http.HttpServer;
-import org.flywaydb.core.Flyway;
-import org.postgresql.ds.PGSimpleDataSource;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.sql.SQLException;
-import java.util.List;
-import java.util.Properties;
-
+/*
 public class MemberDB {
 
     private static TaskDao taskDao;
@@ -101,3 +90,7 @@ public class MemberDB {
         memberDao.insert(member);
     }
 }
+
+ */
+
+

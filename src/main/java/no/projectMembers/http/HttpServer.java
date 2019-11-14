@@ -13,79 +13,85 @@ import static no.projectMembers.http.HttpMessage.readHeaders;
 
 public class HttpServer {
 
-    private static final Logger Logger = LoggerFactory.getLogger(HttpServer.class);
-
-    private HttpController defaultController;
-    private int port;
     private ServerSocket serverSocket;
-    private String fileLocation;
+    private String assetRoot;
+
+    private HttpController defaultController = new FileHttpController(this);
+
     private Map<String, HttpController> controllers = new HashMap<>();
 
     public HttpServer(int port) throws IOException {
-        this.port = port;
         serverSocket = new ServerSocket(port);
-        defaultController = new FileHttpController(this);
-
         controllers.put("/echo", new EchoHttpController());
     }
 
-
     public static void main(String[] args) throws IOException {
-
-        HttpServer httpServer = new HttpServer(8080);
-
-        httpServer.setFileLocation("src/main/resources");
-        httpServer.start();
-
+        new HttpServer(8080).start();
     }
 
     public void start() {
         new Thread(() -> run()).start();
-        Logger.info("Started on http://localhost:{}", getPort());
     }
 
+    private static final Logger logger = LoggerFactory.getLogger(HttpServer.class);
 
     public void run() {
-        while(true) {
+
+        System.out.println("Server running on localhost: " + getPort());
+        boolean keepRunning = true;
+
+        while (keepRunning) {
+
             try {
                 Socket socket = serverSocket.accept();
 
                 String requestLine = HttpMessage.readLine(socket.getInputStream());
-                Logger.debug("Handling request: {}", requestLine);
+                if (requestLine.isBlank()) continue;
+
                 Map<String, String> headers = readHeaders(socket.getInputStream());
                 String body = HttpMessage.readBody(headers, socket.getInputStream());
-
                 String requestAction = requestLine.split(" ")[0];
                 String requestTarget = requestLine.split(" ")[1];
+
                 int questionPos = requestTarget.indexOf('?');
                 String requestPath = questionPos == -1 ? requestTarget : requestTarget.substring(0, questionPos);
+                System.out.println(requestTarget);
                 Map<String, String> query = getQueryParameters(requestTarget);
 
-                controllers.getOrDefault(requestPath, defaultController)
+                controllers
+                        .getOrDefault(requestPath, defaultController)
                         .handle(requestAction, requestPath, query, body, socket.getOutputStream());
+                logger.info("Handling request {} {} ", requestAction, requestPath);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    static Map<String, String> getQueryParameters(String requestTarget) {
+    public static Map<String, String> getQueryParameters(String requestLine) {
+        String requestTarget;
+        if (requestLine.split(" ").length > 1) {
+            requestTarget = requestLine.split(" ")[1];
+        } else {
+            requestTarget = "/";
+        }
         int questionPos = requestTarget.indexOf('?');
-        if (questionPos > 0){
-            String query = requestTarget.substring(questionPos + 1);
-            return parseQueryString(query);
+        if (questionPos != -1) {
+            String queryString = requestTarget.substring(questionPos + 1);
+            return parseQueryString(queryString);
         }
         return new HashMap<>();
     }
 
-    public static Map<String, String> parseQueryString(String query) {
+    public static Map<String, String> parseQueryString(String queryString) {
         Map<String, String> parameters = new HashMap<>();
-        for (String parameter : query.split("&")) {
+        for (String parameter : queryString.split("&")) {
+
             int equalsPos = parameter.indexOf('=');
             String parameterName = parameter.substring(0, equalsPos);
             String parameterValue = parameter.substring(equalsPos + 1);
-            parameters.put(parameterName, parameterValue);
 
+            parameters.put(parameterName, parameterValue);
         }
         return parameters;
     }
@@ -94,38 +100,15 @@ public class HttpServer {
         return serverSocket.getLocalPort();
     }
 
-    public void setFileLocation(String fileLocation) {
-        this.fileLocation = fileLocation;
+    public void setAssetRoot(String assetRoot) {
+        this.assetRoot = assetRoot;
     }
 
-    public String getFileLocation(){ return fileLocation; }
+    public String getAssetRoot() {
+        return assetRoot;
+    }
 
-    public void addController(String path, HttpController controller) {
-        controllers.put(path, controller);
+    public void addController(String requestPath, HttpController controller) {
+        controllers.put(requestPath, controller);
     }
 }
-/*
-                switch (requestPath) {
-                    case "/stop":
-                        System.exit(0);
-                        break;
-                    case "/tasksapi":
-                        String tasks = MemberDB.listAllTasks();
-
-                        socket.getOutputStream().write(("HTTP/1.0 200 OK\r\n" + "Content-length: " + tasks.length() + "\r\n" + "Connection: close\r\n" + "\r\n" + tasks).getBytes());
-                        break;
-                    case "/membersapi":
-                        String members = MemberDB.listAllMembers();
-                        System.out.println(members);
-                        socket.getOutputStream().write(("HTTP/1.0 200 OK\r\n" + "Content-length: " + (members.length() + 1) + "\r\n" + "Connection: close\r\n" + "\r\n" + members).getBytes());
-                        break;
-                    case "/echo":
-                        String statusCode = query.getOrDefault("status", "200");
-                        String location = query.getOrDefault("location", null);
-                        String body = query.getOrDefault("body", "Hello World!");
-
-                        socket.getOutputStream().write(("HTTP/1.0 " + statusCode + " OK\r\n" + "Content-length: " + body.length() + "\r\n" + "Connection: close\r\n" +
-                                (location != null ? "Location: " + location + "\r\n" : "") + "\r\n" + body).getBytes());
-
-                }
-*/

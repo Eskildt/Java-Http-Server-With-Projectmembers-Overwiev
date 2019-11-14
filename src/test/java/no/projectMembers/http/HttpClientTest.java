@@ -36,11 +36,19 @@ public class HttpClientTest {
         assertEquals(12, client.execute().getContentLength());
     }
 
+    /*
     @Test
     void shouldReadBody() throws IOException {
-
-        HttpClient client = new HttpClient(URLECHO, 80, "/echo?body=hello+world!");
-        assertEquals("hello world!", client.execute().getBody());
+        HttpClientResponse response = makeEchoRequest("/echo?body=hello+world");
+        assertThat(response.getHeaders()).containsEntry("content-length", "11");
+        assertThat(response.getContentLength()).isEqualTo(11);
+        assertThat(response.getBody()).isEqualTo("hello world");
     }
 
+
+
+    private HttpClientResponse makeEchoRequest(String s) {
+        return readBody();
+    }
+     */
 }

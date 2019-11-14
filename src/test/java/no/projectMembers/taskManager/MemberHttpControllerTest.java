@@ -11,12 +11,14 @@ class MemberHttpControllerTest {
 
     @Test
     void shouldReturnAllProducts() throws SQLException {
-        MemberDao memberDao = new MemberDao(MemberDaoTest.createDataSource());
-        Member member = MemberDaoTest.sampleMember();
-        memberDao.insert(member);
+        MemberDao dao = new MemberDao(MemberDaoTest.createDataSource());
+        Member member1 = MemberDaoTest.sampleMember();
+        dao.insert(member1);
 
-        MemberHttpController controller = new MemberHttpController(memberDao);
+
+        MemberHttpController controller = new MemberHttpController(dao);
         assertThat(controller.getBody())
-                .contains("<option value='" + member.getId() + "'>" + member.getName() + "</option>");
+                .contains(String.format("<option value='%s'>%s</option>", member1.getId(), member1.getName()));
+
     }
 }

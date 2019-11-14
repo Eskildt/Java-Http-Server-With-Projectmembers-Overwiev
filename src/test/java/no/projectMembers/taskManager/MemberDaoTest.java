@@ -31,6 +31,16 @@ public class MemberDaoTest {
     }
 
     @Test
+    void shouldListSavedMember() throws SQLException{
+        Member member = sampleMember();
+        dao.insert(member);
+        assertThat(dao.listAll())
+                .extracting(Member::getName)
+                .contains(member.getName());
+    }
+
+
+    @Test
     public void shouldListInsertedMembers() throws SQLException {
         MemberDao memberDao = new MemberDao(dataSource);
         Member member = sampleMember();
@@ -38,44 +48,15 @@ public class MemberDaoTest {
         Assertions.assertThat(memberDao.listAll()).contains(member);
     }
 
-    @Test
-    void shouldSaveAllMemberFields()throws SQLException{
-        MemberDao memberDao = new MemberDao(dataSource);
-        Member member = sampleMember();
-        assertThat(member).hasNoNullFieldsOrProperties();
-        long id = memberDao.insert(member);
-        assertThat(memberDao.retrieve(id)).isEqualToComparingFieldByField(member);
-    }
+
+
 
     static Member sampleMember(){
         Member member = new Member();
-        member.setName(sampleMemberName());
-        member.setTask(sampleRandomTask());
-        member.setEmail(sampleEmail());
+        member.setName(pickOne(new String[]{"Bjørg", "Bjarne", "Bjarte", "Brage"}));
         return member;
     }
 
-    private static String sampleMemberName(){
-        String[] alternatives = {
-                "Bjørg", "Bjarne", "Bjarte", "Brage"
-        };
-        return alternatives[new Random().nextInt(alternatives.length)];
-    }
-
-    private static String sampleRandomTask(){
-        String[] alternatives = {
-                "Trene", "Programmere", "Lage mat", "Se på TV"
-        };
-
-        return alternatives[new Random().nextInt(alternatives.length)];
-    }
-
-    private static String sampleEmail(){
-        String[] alternatives ={
-                "bjørg@mail.com", "bjarne@mail.com", "bjarte@yahoo.com", "brage@hotmail.com"
-        };
-        return alternatives[new Random().nextInt(alternatives.length)];
-    }
 
     private static String pickOne(String[] alternatives){return alternatives[random.nextInt(alternatives.length)];}
 }
