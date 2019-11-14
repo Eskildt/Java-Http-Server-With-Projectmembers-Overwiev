@@ -29,13 +29,38 @@ new Vue({
             output: ""
         };
     },
-    mounted() {
-        let membersResult;
-        axios
-            .get("http://localhost:8080/membersapi")
-            .then(response => (this.members = response.data));
-        axios
-            .get("http://localhost:8080/tasksapi")
-            .then(response => (this.tasks = response.data));
+    methods: {
+       getData: function(){
+           axios
+               .get("http://localhost:8080/membersapi")
+               .then(response => (this.members = response.data));
+           axios
+               .get("http://localhost:8080/tasksapi")
+               .then(response => (this.tasks = response.data));
+       },
+        formSubmit(e) {
+           e.preventDefault();
+           console.log(e.target.name);
+           console.log(this.email);
+           let body = `name=${this.name}&email=${this.email}`;
+           body = endcodeURI(body);
+           axios({
+               methos:"put",
+               url:"/api/members",
+               data: body
+           })
+               .then(function(response){
+                   currentObj.output = response.data;
+               })
+               .catch(function(error) {
+                   currentObj.output = error;
+               )};
+               this.name ="";
+               this.email ="";
+               this.getData();
+               }
+            },
+            mounted(){
+                this.getData();
     }
 });
