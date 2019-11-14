@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Maya og Eskilds web-applikasjon</title>
+    <link rel="stylesheet" type="text/css" href="style.css" /> 
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+</head>
+
+<body>
+<div id="app">
+
+    <header>
+        <h1>ProjectManager</h1>
+    </header>
+    <main>
+        <task-table v-if="currentMain === 'tasks'" v-bind:tasks="tasks"></task-table>
+        </project-table>
+        <project-table v-else v-bind:projects="projects"></project-table>
+    </main>
+    <aside>
+
+        <h4>New Project</h4><br>
+        <form @submit="formSubmit">
+            <strong>Name:</strong>
+            <input type="text" class="form-control" v-model="name">
+            <strong>Description</strong>
+            <input type="text" class="form-control" v-model="description">
+            <strong>Status</strong>
+            <input type="text" class="form-control" v-model="status">
+            <button>Submit</button>
+        </form>
+        <a href="index.html">Create new Member</a>
+        <pre>
+       {{output}}
+      </pre>
+    </aside>
+
+</div>
+<script src="createProject.js"></script>
+</body>
+
+</html>

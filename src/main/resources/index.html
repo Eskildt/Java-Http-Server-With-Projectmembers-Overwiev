@@ -7,39 +7,75 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
 </head>
-<body>
-<h1>Project view</h1>
 
-<div id="projectMembers"></div>
+<body>
 <div id="app">
 
-<div>
-    <a href="newWorker.html">Add new project member</a>
+    <header>
+        <h1>ProjectManager</h1>
 
-        <table>
-            <tr>
-                <th>Name</th>
-                <th>Task</th>
-                <th>Email</th>
-            </tr>
-            <tr v-for="member in members">
-                <td>{{member.name}}</td>
-                <td>{{member.project}}</td>
-                <td>{{member.email}}</td>
-            </tr>
-        </table>
-    </div>
+    </header>
+    <main>
+        <nav>
+            <ul>
+                <li v-bind:class="{ active: currentMain == 'projects' }" v-on:click="currentMain = 'projects'; getData();">Projects</li>
+                <li v-bind:class="{ active: currentMain == 'members' }" v-on:click="currentMain = 'members'; getData();">Members</li>
+            </ul>
+        </nav>
+        <projects-table v-if="currentMain === 'projects'" v-bind:projects="projects"></projects-table>
+        </member-table>
+        <member-table v-else v-bind:members="members">
 
-    </div>
+        </member-table>
+    </main>
+    <aside>
+
+        <h4>New Project </h4><br>
+
+        <form @submit="formSubmit">
+            <div class="row">
+                <div class="col-25">
+                    <label for="name">Name</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="name" name="name" placeholder="Member name" v-model="name">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="email">Email</label>
+                </div>
+                <div class="col-75">
+                    <input type="email" id="email" name="email" placeholder="Member Email" v-model="email">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="country">Category</label>
+                </div>
+                <div class="col-75">
+                    <select id="category" name="category">
+                        <option value="coding">Coding</option>
+                        <option value="design">Design</option>
+                        <option value="managment">Managment</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="description">Description</label>
+                </div>
+                <div class="col-75">
+                    <textarea id="description" name="description" placeholder="Project description.." style="height:200px"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <input type="submit" value="Add project">
+            </div>
+        </form>
+    </aside>
+</div>
+<script type="module" src="./app.js"></script>
 </body>
-<script>
-    fetch("/projectMembers")
-        .then(function(response) {
-            return response.text();
-        }).then(function(text) {
-        document.getElementById("projectMembers").innerHTML = text;
-    });
-</script>
-<script src="./app.js"></script>
 
 </html>
