@@ -4,31 +4,25 @@ import java.util.Objects;
 
 public class Member {
 
-    public String task;
     public String email;
     private String name;
     public int id;
 
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
+    @Override
+    public String toString() {
+        return "{" +
+                "id=" + id + ", name='" + name + '\'' + ", email='" + email + '\'' + '}';
     }
 
     @Override
-    public String toString(){
-        return "{ID: " + id + "Member: " + name + " Project: " + task + " Email: " + email + "}";
-    }
-
-    @Override
-    public boolean equals(Object o){
-        if(this == o) return true;
-        if(o == null || getClass() != o.getClass()) return false;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         Member member = (Member) o;
-        return Objects.equals(name, member.name);
+        return id == member.id &&
+                Objects.equals(name, member.name) &&
+                Objects.equals(email, member.email);
     }
 
     @Override
@@ -36,12 +30,12 @@ public class Member {
         return Objects.hash(name);
     }
 
-    public void setTask(String task){
-        this.task = task;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getTask(){
-        return task;
+    public String getName() {
+        return name;
     }
 
     public void setEmail(String email) {

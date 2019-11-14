@@ -1,6 +1,5 @@
 package no.projectMembers.taskManager;
 
-import org.assertj.core.api.Assertions;
 import org.flywaydb.core.Flyway;
 import org.h2.jdbcx.JdbcDataSource;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,16 +13,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class MemberDaoTest {
 
     private static Random random = new Random();
-    JdbcDataSource dataSource = TestDatabase.testDataSource();
     private MemberDao dao;
 
     @BeforeEach
-    void setUp(){
-        dataSource = createDataSource();
+    void setup(){
+        JdbcDataSource dataSource = createDataSource();
         dao = new MemberDao(dataSource);
     }
 
-    static JdbcDataSource createDataSource() {
+    static JdbcDataSource createDataSource(){
         JdbcDataSource dataSource = new JdbcDataSource();
         dataSource.setUrl("jdbc:h2:mem:memberTest;DB_CLOSE_DELAY=-1");
         Flyway.configure().dataSource(dataSource).load().migrate();
@@ -39,24 +37,31 @@ public class MemberDaoTest {
                 .contains(member.getName());
     }
 
-
     @Test
-    public void shouldListInsertedMembers() throws SQLException {
-        MemberDao memberDao = new MemberDao(dataSource);
+    public void shouldRetrieveSavedMember() throws SQLException{
         Member member = sampleMember();
-        memberDao.insert(member);
-        Assertions.assertThat(memberDao.listAll()).contains(member);
+        dao.insert(member);
+        assertThat(member).hasNoNullFieldsOrProperties();
+        assertThat(dao.retrieve(member.getId())).isEqualToComparingFieldByField(member);
     }
 
-
-
-
+    @Test
     static Member sampleMember(){
         Member member = new Member();
-        member.setName(pickOne(new String[]{"Bjørg", "Bjarne", "Bjarte", "Brage"}));
+
+        member.setName(pickOneName(new String[] {"Bjørg", "Bjarne", "Bjarte", "Brage", "Britt", "Børge", "Borgar", "Bjørnar"}));
+        member.setEmail(pickOneEmail(new String[] {"Bjørg@strikkeklubben.no", "Bjarne@esso.no", "Bjarte@radioresepsjonen.no","Brage@drageklubben.com", "Britt@heimkunnskap.no", "Børge@hodejegerne.no", "Borgar@SopraSteria.no", "Bjørnar@bjørneparken.no"}));
         return member;
     }
 
 
-    private static String pickOne(String[] alternatives){return alternatives[random.nextInt(alternatives.length)];}
+    static String pickOneName(String[] alternatives) {
+
+        return alternatives[random.nextInt(alternatives.length)];
+    }
+
+    static String pickOneEmail(String[] alternatives) {
+
+        return alternatives[random.nextInt(alternatives.length)];
+    }
 }

@@ -14,7 +14,7 @@
 * Oppgaven **skal** løses parvis. Dere kan velge om dere vil beholde par fra siste innlevering eller finne nye partnere. Ønsker du å levere alene eller i gruppe på tre må dette avklares med foreleser innen siste forelesning
 * Innleveringen skal deles med en annen gruppe for gjensidig tilbakemelding. Tilbakemelding skal gis i form av Github issues
 * README.md på Github **skal** linke til Travis-CI som skal kjøre enhetstester uten feil. README-filen skal også inneholde link til gitt tilbakemelding til annet team, et UML-diagram samt beskrivelse av hva kandiditene ønskes skal vurderes i evalueringen av innleveringen
-* Koden **skal** lese database settings fra en fil som heter `task-manager.properties` og ser ut som følger:
+* Koden **skal** lese database settings fra en fil som heter `project-manager.properties` og ser ut som følger:
 
 ```properties
 dataSource.url=...
@@ -138,7 +138,7 @@ body {
 * [x] `mvn package` bygger en executable jar-fil
 * [x] Koden inneholder et godt sett med tester
 * [x] `java -jar target/...jar` (etter `mvn package`) lar bruker legge til å liste ut data fra databasen
-* [x] Programmet leser `dataSource.url`, `dataSource.username` og `dataSource.password` fra `task-manager.properties` for å connecte til databasen
+* [x] Programmet leser `dataSource.url`, `dataSource.username` og `dataSource.password` fra `project-manager.properties` for å connecte til databasen
 * [x] Programmet bruker Flywaydb for å sette opp databaseskjema
 * [/] Server skriver nyttige loggmeldinger, inkludert informasjon om hvilken URL den kjører på ved oppstart
 * [x] `.gitignore` inneholder nødvendige filer

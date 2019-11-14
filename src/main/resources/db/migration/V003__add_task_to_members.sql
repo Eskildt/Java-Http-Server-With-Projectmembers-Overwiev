@@ -1,1 +1,1 @@
-ALTER TABLE members ADD task varchar;
+ALTER TABLE members ADD project varchar;
