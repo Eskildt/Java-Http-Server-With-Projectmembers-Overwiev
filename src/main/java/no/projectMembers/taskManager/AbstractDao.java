@@ -41,5 +41,19 @@ public abstract class AbstractDao<T> {
         }
     }
 
+    public long alter(T member, String sql) throws SQLException{
+        try(Connection connection = dataSource.getConnection()){
+            PreparedStatement statement = connection.prepareStatement(sql);{
+                insertObject(member, statement);
+                statement.executeUpdate();
+
+                ResultSet generatedKeys = statement.getGeneratedKeys();
+                generatedKeys.next();
+                return generatedKeys.getLong(1);
+
+            }
+        }
+    }
+
     protected abstract T readObject(ResultSet resultSet) throws SQLException;
 }

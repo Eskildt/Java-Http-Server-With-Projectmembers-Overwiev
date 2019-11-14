@@ -1,5 +1,6 @@
 package no.projectMembers.taskManager;
 
+import com.google.gson.Gson;
 import no.projectMembers.http.HttpController;
 import no.projectMembers.http.HttpServer;
 import org.slf4j.Logger;
@@ -9,61 +10,79 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.sql.SQLException;
 import java.util.Map;
-import java.util.stream.Collectors;
+
+import static no.projectMembers.http.HttpServer.decodeValue;
 
 public class MemberHttpController implements HttpController {
-    private static final Logger logger = LoggerFactory.getLogger(MemberHttpController.class);
 
-    private MemberDao memberDao;
+    private final MemberDao memberDao;
 
     public MemberHttpController(MemberDao memberDao) {
         this.memberDao = memberDao;
     }
 
+    private static final Logger logger = LoggerFactory.getLogger(HttpServer.class);
+
     @Override
-    public void handle(String requestAction, String requestPath, Map<String, String> query, String requestBody, OutputStream outputStream) throws IOException {
+    public void handle(String requestAction, String requestPath, Map<String, String> query, String requestBody, OutputStream outputStream) throws IOException{
+
+
         try {
-        if(requestAction.equals("POST")){
-            query = HttpServer.parseQueryString(requestBody);
-            Member member = new Member();
-            member.setName(query.get("memberName"));
-            memberDao.insert(member);
-            outputStream.write(("HTTP/1.1 302 Redirect\r\n" +
-                    "Location: http://localhost:8080/\r\n" +
-                    "connection: close\r\n" +
-                    "\r\n").getBytes());
-            return;
-        }
-            String statusCode = "200";
-            String contentType = "text/html";
+            if (requestAction.equals("PUT")){
+                System.out.println(requestBody);
+                query = HttpServer.parseQueryString(requestBody);
+
+                Member member = new Member();
+                    System.out.println(query.get("name"));
+
+                    member.setName(decodeValue(query.get("name")));
+                    member.setEmail(decodeValue(query.get("email")));
+                    memberDao.insert(member);
+                        outputStream.write(("HTTP/1.1 200 OK\r\n" +
+                            "Connection: close\r\n" +
+                                "\r\n").getBytes());
+                    return;
+                }
+                    if (requestAction.equals("POST")){
+                System.out.println(requestBody);
+                query = HttpServer.parseQueryString(requestBody);
+
+                Member member = new Member();
+                System.out.println(query.get("name"));
+                member.setName(decodeValue(query.get("name")));
+                member.setEmail(decodeValue(query.get("email")));
+                memberDao.alter(member);
+                outputStream.write(("HTTP/1.1 200 OK\r\n" +
+                        "Connection: close\r\n" +
+                        "\r\n").getBytes());
+                return;
+            }
+
+            int status = 200;
             String body = getBody();
-            int contentLength = body.length();
-            outputStream.write(("HTTP/1.1 " + statusCode + " OK\r\n" +
-                    "Content-type: " + contentType + "\r\n" +
-                    "Content-length: " + contentLength + "\r\n" +
-                    "Connection: close\r\n" +
-                    "\r\n" +
-                    body).getBytes());
+            int contentLength = body.getBytes("UTF-8").length;
+            String contentType = "application/json";
+            outputStream.write(("HTTP/1.0 200 OK\r\n" + "Content-length: " + contentLength +  "\r\n" +
+                    "Content-type: " + contentType + "\r\n" + "Connection: close\r\n"+ "\r\n" + body).getBytes("UTF-8"));
+            outputStream.flush();
         } catch (SQLException e) {
-            logger.error("While handling request {}", requestPath, e);
+            logger.error("While handling requests {}", requestPath, e);
             String message = e.toString();
             outputStream.write(("HTTP/1.1 500 Internal server error\r\n" +
                     "Content-type: text/plain\r\n" +
-                    "Content-length: " + message.length() + "\r\n" +
+                    "Content-Length: " + message.length() + "\r\n" +
                     "Connection: close\r\n" +
-                    "\r\n" +
-                    message).getBytes());
+                    "\r\n" ).getBytes());
         }
     }
 
-    String getBody() throws SQLException {
-        String body = memberDao.listAll().stream()
-                .map(p -> String.format("<option value='%s'>%s</option>", p.getId()-1,p.getName()))
-                .collect(Collectors.joining(""));
-        return body;
-    }
-}
+    public String getBody() throws SQLException {
+        var members= memberDao.listAll();
 
+        return new Gson().toJson(members);
+    }
+
+}
 
 
 

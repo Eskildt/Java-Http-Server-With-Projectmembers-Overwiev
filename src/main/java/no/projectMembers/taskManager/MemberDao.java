@@ -9,32 +9,32 @@ import java.util.List;
 
 public class MemberDao extends AbstractDao<Member> {
 
-    public MemberDao(DataSource datasource){
-        super(datasource);
+
+    public MemberDao(DataSource dataSource) {
+        super(dataSource);
     }
 
-    public long insert(Member member) throws SQLException{
-        return insert(member, "INSERT INTO members (NAME, TASK, EMAIL) VALUES (?, ?, ?)");
+    public long insert(Member member) throws SQLException {
+        return insert(member, "INSERT INTO members (NAME, EMAIL) VALUES (?, ?)");
+    }
+
+    public long alter(Member member) throws SQLException{
+        return alter(member, "ALTER members (NAME, EMAIL) VALUES (?, ?)");
     }
 
     @Override
-    protected void insertObject(Member member, PreparedStatement statement) throws SQLException{
+    protected void insertObject(Member member, PreparedStatement statement) throws SQLException {
         statement.setString(1, member.getName());
-        statement.setString(2, member.getTask());
-        statement.setString(3, member.getEmail());
-    }
-
-    public List<Member> listAll() throws SQLException {
-        return listAll("SELECT * FROM members");
+        statement.setString(2, member.getEmail());
     }
 
     @Override
-    protected Member readObject(ResultSet resultset) throws SQLException {
+    protected Member readObject(ResultSet resultSet) throws SQLException {
         Member member = new Member();
-        member.setId(resultset.getInt("id"));
-        member.setName(resultset.getString("name"));
-        member.setTask(resultset.getString("task"));
-        member.setEmail(resultset.getString("email"));
+        member.setId(resultSet.getInt("id"));
+        member.setName(resultSet.getString("name"));
+        member.setEmail(resultSet.getString("email"));
+
         return member;
     }
 
@@ -43,8 +43,7 @@ public class MemberDao extends AbstractDao<Member> {
             try(PreparedStatement statement = connection.prepareStatement("SELECT * FROM members WHERE ID = ?")) {
                 statement.setLong(1, id);
                 try(ResultSet resultSet = statement.executeQuery()) {
-
-                    if(resultSet.next()){
+                    if(resultSet.next()) {
                         return readObject(resultSet);
                     } else {
                         return null;
@@ -52,5 +51,9 @@ public class MemberDao extends AbstractDao<Member> {
                 }
             }
         }
+    }
+
+    public List<Member> listAll() throws SQLException {
+        return listAll("SELECT * FROM members");
     }
 }
