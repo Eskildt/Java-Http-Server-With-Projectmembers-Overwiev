@@ -1,66 +1,69 @@
-Vue.component("member.table", {
+Vue.component("member-table", {
     props: ["members"],
     template: `
-    <table>
-        <h3>Members:</h3>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Email</th>
-        </tr>
-        <tr v-for="member in members" @click=""window.console.log(member.id)">
+<table> 
+      <h3>Members:</h3>
+      <tr> 
+        <th>Id</th>
+        <th>Name</th>
+        <th>Email</th> 
+      </tr>
+      <tr v-for="member in members" @click="window.console.log(member.id)">
         <td>{{member.id}}</td>
         <td>{{member.name}}</td>
         <td>{{member.email}}</td>
-        </tr>
-      </table>
+      </tr>
+    </table> 
   `
 });
 
+//Members Table
 new Vue({
     el: "#app",
     data() {
         return {
-            currentMain:"project",
+            currentMain: "projects",
             members: [],
-            project: [],
+            projects: [],
             name: "",
             email: "",
             output: ""
         };
     },
     methods: {
-       getData: function(){
-           axios
-               .get("http://localhost:8080/membersapi")
-               .then(response => (this.members = response.data));
-           axios
-               .get("http://localhost:8080/tasksapi")
-               .then(response => (this.tasks = response.data));
-       },
+        getData: function() {
+            axios
+                .get("http://localhost:8080/api/members")
+                .then(response => (this.members = response.data));
+            axios
+                .get("http://localhost:8080/api/projects")
+                .then(response => (this.projects = response.data));
+        },
         formSubmit(e) {
-           e.preventDefault();
-           console.log(e.target.name);
-           console.log(this.email);
-           let body = `name=${this.name}&email=${this.email}`;
-           body = endcodeURI(body);
-           axios({
-               methos:"put",
-               url:"/api/members",
-               data: body
-           })
-               .then(function(response){
-                   currentObj.output = response.data;
-               })
-               .catch(function(error) {
-                   currentObj.output = error;
-               )};
-               this.name ="";
-               this.email ="";
-               this.getData();
-               }
-            },
-            mounted(){
-                this.getData();
+            e.preventDefault();
+            console.log(e.target.name);
+            console.log(this.email);
+            let body = `name=${this.name}&email=${this.email}`;
+            body = encodeURI(body);
+            axios({
+                method: "put",
+                url: "/api/members",
+                data: body
+            })
+                .then(function(response) {
+                    currentObj.output = response.data;
+                })
+                .catch(function(error) {
+                    currentObj.output = error;
+                });
+            this.name = "";
+            this.email = "";
+            this.getData();
+        }
+    },
+    mounted() {
+        this.getData();
     }
+
+
 });

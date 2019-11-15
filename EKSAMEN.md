@@ -140,7 +140,7 @@ body {
 * [x] `java -jar target/...jar` (etter `mvn package`) lar bruker legge til å liste ut data fra databasen
 * [x] Programmet leser `dataSource.url`, `dataSource.username` og `dataSource.password` fra `project-manager.properties` for å connecte til databasen
 * [x] Programmet bruker Flywaydb for å sette opp databaseskjema
-* [/] Server skriver nyttige loggmeldinger, inkludert informasjon om hvilken URL den kjører på ved oppstart
+* [x] Server skriver nyttige loggmeldinger, inkludert informasjon om hvilken URL den kjører på ved oppstart
 * [x] `.gitignore` inneholder nødvendige filer
 
 ### Funksjonalitet [/]
