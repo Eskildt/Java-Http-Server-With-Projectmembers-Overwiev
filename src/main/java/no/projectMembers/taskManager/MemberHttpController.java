@@ -37,6 +37,7 @@ public class MemberHttpController implements HttpController {
 
                     member.setName(decodeValue(query.get("name")));
                     member.setEmail(decodeValue(query.get("email")));
+                    member.setProject(decodeValue(query.get("project")));
                     memberDao.insert(member);
                         outputStream.write(("HTTP/1.1 200 OK\r\n" +
                             "Connection: close\r\n" +
@@ -51,6 +52,7 @@ public class MemberHttpController implements HttpController {
                 System.out.println(query.get("name"));
                 member.setName(decodeValue(query.get("name")));
                 member.setEmail(decodeValue(query.get("email")));
+                member.setProject(decodeValue(query.get("project")));
                 memberDao.alter(member);
                 outputStream.write(("HTTP/1.1 200 OK\r\n" +
                         "Connection: close\r\n" +

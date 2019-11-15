@@ -8,24 +8,24 @@ import java.sql.SQLException;
 import java.util.List;
 
 
-public class ProjectDao extends AbstractDao<Project> {
+public class ProjectsDao extends AbstractDao<Projects> {
 
-    public ProjectDao(DataSource dataSource){
+    public ProjectsDao(DataSource dataSource){
         super(dataSource);
     }
 
-    public void insert(Project project) throws SQLException{
+    public void insert(Projects project) throws SQLException{
         insert(project, "INSERT INTO projects (NAME, DESCRIPTION, STATUS) VALUES (?, ?, ?)");
     }
 
     @Override
-    protected void insertObject(Project project, PreparedStatement statement) throws SQLException{
+    protected void insertObject(Projects project, PreparedStatement statement) throws SQLException{
         statement.setString(1, project.getName());
         statement.setString(2, project.getDescription());
         statement.setString(3, project.getStatus());
     }
 
-    public Project retrieve(long id) throws SQLException {
+    public Projects retrieve(long id) throws SQLException {
         try(Connection connection = dataSource.getConnection()){
             try(PreparedStatement statement = connection.prepareStatement("SELECT * FROM members WHERE ID = ?")) {
                 statement.setLong(1, id);
@@ -40,17 +40,17 @@ public class ProjectDao extends AbstractDao<Project> {
         }
     }
 
-    public List<Project> listAll() throws SQLException {
+    public List<Projects> listAll() throws SQLException {
         return listAll("SELECT * FROM projects");
     }
 
     @Override
-    protected Project readObject(ResultSet resultSet) throws SQLException{
-        Project project = new Project();
-        project.setId(resultSet.getInt("Id"));
-        project.setName(resultSet.getString("Name"));
-        project.setDescription(resultSet.getString("Description"));
-        project.setStatus(resultSet.getString("Status"));
-        return project;
+    protected Projects readObject(ResultSet resultSet) throws SQLException{
+        Projects projects = new Projects();
+        projects.setId(resultSet.getInt("Id"));
+        projects.setName(resultSet.getString("Name"));
+        projects.setDescription(resultSet.getString("Description"));
+        projects.setStatus(resultSet.getString("Status"));
+        return projects;
     }
 }

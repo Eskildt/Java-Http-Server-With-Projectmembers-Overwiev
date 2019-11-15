@@ -7,12 +7,12 @@ public class Member {
     public String email;
     private String name;
     public int id;
+    public String project;
 
 
     @Override
     public String toString() {
-        return "{" +
-                "id=" + id + ", name='" + name + '\'' + ", email='" + email + '\'' + '}';
+        return "{" + "id=" + id + ", name='" + name + '\'' + ", email='" + email + '\'' + ", project='" + project + '\'' + '}';
     }
 
     @Override
@@ -22,7 +22,8 @@ public class Member {
         Member member = (Member) o;
         return id == member.id &&
                 Objects.equals(name, member.name) &&
-                Objects.equals(email, member.email);
+                Objects.equals(email, member.email) &&
+                Objects.equals(project, member.project);
     }
 
     @Override
@@ -51,5 +52,13 @@ public class Member {
 
     public int getId() {
         return id;
+    }
+
+    public void setProject(String project){
+        this.project = project;
+    }
+
+    public String getProject(){
+        return project;
     }
 }

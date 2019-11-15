@@ -7,11 +7,13 @@ Vue.component("member-table", {
         <th>Id</th>
         <th>Name</th>
         <th>Email</th> 
+        <th>Project</th>
       </tr>
       <tr v-for="member in members" @click="window.console.log(member.id)">
         <td>{{member.id}}</td>
         <td>{{member.name}}</td>
         <td>{{member.email}}</td>
+        <td>{{member.project}}</td>
       </tr>
     </table> 
   `
@@ -24,7 +26,7 @@ new Vue({
         return {
             currentMain: "projects",
             members: [],
-            projects: [],
+            project: [],
             name: "",
             email: "",
             output: ""
@@ -43,7 +45,8 @@ new Vue({
             e.preventDefault();
             console.log(e.target.name);
             console.log(this.email);
-            let body = `name=${this.name}&email=${this.email}`;
+            console.log(this.project);
+            let body = `name=${this.name}&email=${this.email}&project=${this.project}`;
             body = encodeURI(body);
             axios({
                 method: "put",
@@ -58,12 +61,11 @@ new Vue({
                 });
             this.name = "";
             this.email = "";
+            this.project = "";
             this.getData();
         }
     },
     mounted() {
         this.getData();
     }
-
-
 });

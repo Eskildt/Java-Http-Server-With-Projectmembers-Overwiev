@@ -2,7 +2,7 @@ package no.projectMembers.taskManager;
 
 import java.util.Objects;
 
-public class Project {
+public class Projects {
     private int id;
     private String name;
     private String description;
@@ -22,11 +22,11 @@ public class Project {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Project project = (Project) o;
-        return id == project.id &&
-                status == project.status &&
-                Objects.equals(name, project.name) &&
-                Objects.equals(description, project.description);
+        Projects projects = (Projects) o;
+        return id == projects.id &&
+                status == projects.status &&
+                Objects.equals(name, projects.name) &&
+                Objects.equals(description, projects.description);
     }
 
     @Override

@@ -78,7 +78,7 @@ lihover:not(.active) {
     background-color: #4CAF50;
 }
 
-input[type=text], input[type=email], select, textarea {
+input[type=text], input[type=email], input[type=project], select, textarea {
     width: 90%;
     padding: 12px;
     border: 1px solid #ccc;
