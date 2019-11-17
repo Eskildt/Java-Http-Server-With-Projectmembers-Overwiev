@@ -13,14 +13,19 @@
 
     <header>
         <h1>ProjectManager</h1>
+        <h4> New project</h4>
 
     </header>
     <main>
         <nav>
             <ul>
-                <li v-bind:class="{ active: currentMail == 'newProject'}" v-on:click="currentMail =' newProject'; getData();">New project</li>
+                <button class="button">
                 <li v-bind:class="{ active: currentMain == 'projects' }" v-on:click="currentMain = 'projects'; getData();">Projects</li>
+                </button>
+                <button class="button">
                 <li v-bind:class="{ active: currentMain == 'members' }" v-on:click="currentMain = 'members'; getData();">Members</li>
+                </button>
+
 
             </ul>
         </nav>
@@ -81,11 +86,10 @@
                 <input type="submit" value="Add projects">
             </div>
         </form>
-        <div>
-            <a href="newProject.html">Create Project</a>
-        </div>
-        <div>
-            <a href="alterTable.html">Make changes to table</a>
+        <div class="taskmeny">
+          <ul> <li><a href="newProject.html">Create Project</a></li>
+            <li><a href="alterTable.html">Make changes to table</a></li>
+              </ul>
         </div>
     </aside>
 </div>

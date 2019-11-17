@@ -17,7 +17,11 @@ body {
     grid-gap: 1em;
 }
 
-
+h4{
+    position: relative;
+    right: 650px;
+    top: 50px;
+}
 
 h3 {
     margin-top: 40px;
@@ -43,7 +47,12 @@ aside {
 
 }
 
+.button{
+    background-color: white;
+    border-radius: 10px;
+}
 
+}
 
 header,
 footer {
@@ -58,27 +67,45 @@ nav {
     bottom:5vh;
 }
 
-ul {
+nav ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     position: relative;
-    left:315px;
+    left:915px;
 
 }
 
-li {
-    padding: 14px 16px;
+nav li {
+
     background: white;
     display: inline;
     border-right: 18vh solid white;
-    border-style: inset;
+    font-size: 20px;
+}
+
+.taskmeny ul {
+
 
 }
 
+.taskmeny ul li {
+
+}
+a {
+    font-family: Helvetica;
+    color: black;
+    text-decoration: none;
+    transition: 0.5s ease-in-out;
+}
+a:hover {
+    height:10px;
+    transition: height 0.5s;
+    color: darkgrey;
+}
 
 lihover:not(.active) {
-    background-color: #111;
+    background-color: grey;
 }
 
 
@@ -106,7 +133,7 @@ input[type=submit] {
 }
 
 input[type=submit]:hover {
-    background-color: #45a049;
+    background-color:darkgrey;
 }
 
 .container {
@@ -145,7 +172,7 @@ table {
     margin-left: 10px;
     margin-top: 20px;
     position: relative;
-    left:500px;
+    left:580px;
     bottom:60px;
 }
 table th {
