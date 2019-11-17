@@ -16,6 +16,7 @@ Vue.component("member-table", {
         <td>{{member.project}}</td>
       </tr>
     </table> 
+
   `
 });
 
@@ -68,4 +69,8 @@ new Vue({
     mounted() {
         this.getData();
     }
+
+
+
+
 });

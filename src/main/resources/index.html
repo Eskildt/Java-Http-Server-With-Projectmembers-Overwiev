@@ -18,8 +18,10 @@
     <main>
         <nav>
             <ul>
+                <li v-bind:class="{ active: currentMail == 'newProject'}" v-on:click="currentMail =' newProject'; getData();">New project</li>
                 <li v-bind:class="{ active: currentMain == 'projects' }" v-on:click="currentMain = 'projects'; getData();">Projects</li>
                 <li v-bind:class="{ active: currentMain == 'members' }" v-on:click="currentMain = 'members'; getData();">Members</li>
+
             </ul>
         </nav>
         <projects-table v-if="currentMain === 'projects'" v-bind:projects="projects"></projects-table>
@@ -30,7 +32,6 @@
     </main>
     <aside>
 
-        <h4>New Project </h4><br>
 
         <form @submit="formSubmit">
             <div class="row">
@@ -38,7 +39,7 @@
                     <label for="name">Name</label>
                 </div>
                 <div class="col-75">
-                    <input type="text" id="name" name="name" placeholder="Member name" v-model="name">
+                    <input type="text" id="name" name="name" placeholder="Enter name" v-model="name">
                 </div>
             </div>
             <div class="row">
@@ -46,7 +47,7 @@
                     <label for="email">Email</label>
                 </div>
                 <div class="col-75">
-                    <input type="email" id="email" name="email" placeholder="Member Email" v-model="email">
+                    <input type="email" id="email" name="email" placeholder="Enter Email" v-model="email">
                 </div>
             </div><div class="row">
                 <div class="col-25">
@@ -73,7 +74,7 @@
                     <label for="description">Description</label>
                 </div>
                 <div class="col-75">
-                    <textarea id="description" name="description" placeholder="Project description.." style="height:200px"></textarea>
+                    <textarea id="description" name="description" placeholder="Enter project description." style="height:200px"></textarea>
                 </div>
             </div>
             <div class="row">

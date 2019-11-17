@@ -7,9 +7,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="project-manager" />
+        <module name="pgr203-2019-eksamen-Eskildt2" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="pgr203-2019-eksamen-Eskildt2" target="11" />
       <module name="project-manager" target="11" />
       <module name="task-manager" target="11" />
     </bytecodeTargetLevel>

@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/pgr203-2019-eksamen-Eskildt2.iml" filepath="$PROJECT_DIR$/pgr203-2019-eksamen-Eskildt2.iml" />
       <module fileurl="file://$PROJECT_DIR$/project-manager.iml" filepath="$PROJECT_DIR$/project-manager.iml" />
     </modules>
   </component>
