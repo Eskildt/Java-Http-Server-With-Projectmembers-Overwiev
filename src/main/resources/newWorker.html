@@ -2,45 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Add projects member | KristianiaProject</title>
+    <title>Add project member | KristianiaProject</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<h1>Add projects member</h1>
+<h1>Add project member</h1>
+
 <form method="POST" action="/members">
-    <label>Member name: <input type="text" name="full_name" /></label>
+    <label>Member name: <input type="text" name="memberName" /></label>
     <button>Add</button>
 </form>
 
-<form action="/api/products" method="post">
-    <label>
-        Member name:
-        <input type="text" name="memberName"/>
-    </label>
-    <label>
-        Project:
-        <input type="text" name="projects">
-    </label>
 
-    <label>
-        Email:
-        <input type="text" name="email">
-    </label>
-
-</form>
 
 <div>
     <a href="index.html">Return to front page</a>
 </div>
 
-</body>
+<h2 id = "membersHeader">Registered members</h2>
+<div id="members"></div>
 
 <script>
-fetch("/api/members")
-    .then(function(result) {
-        return result.text();
-    }).then(function (text) {
-    document.getElementById("members").innerHTML = text;
-});
+    fetch("/members")
+        .then(function(response) {
+            return response.text();
+        }).then(function(text) {
+        document.getElementById("members").innerHTML = text;
+    });
 </script>
+</body>
 </html>

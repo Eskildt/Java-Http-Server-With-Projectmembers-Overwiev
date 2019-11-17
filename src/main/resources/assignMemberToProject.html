@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assign a member to a task | KristianiaProject</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>Assign a member to a task</h1>
+
+
+<form method="POST" action="/assignmember">
+    <label>
+        <h3 id = "chooseATaskText">Choose a task</h3>
+        <select name ="taskid" id="tasks">
+        </select>
+    </label>
+
+    <label>
+        <h3 id = "chooseAMemberText">Choose a Member</h3>
+        <select name ="memberid" id="members">
+        </select>
+    </label>
+
+
+    <button id="assignButton">Add</button>
+</form>
+
+<form action ="">
+    <label>
+        <h3 id = "assignedMembersText">Tasks with assigned members</h3>
+        <div name ="" id="assignmember">
+        </div>
+    </label>
+
+</form>
+
+<div>
+    <a href="index.html">Return to front page</a>
+</div>
+
+
+
+
+<script>
+    var tasks = document.getElementById("project");
+    fetch("/project")
+        .then(function(response) {
+            return response.text();
+        }).then(function(text) {
+        tasks.innerHTML = text;
+    });
+
+
+    var members = document.getElementById("members");
+    fetch("/members")
+        .then(function(response) {
+            return response.text();
+        }).then(function(text) {
+        members.innerHTML = text;
+    });
+
+
+    var assignmember = document.getElementById("assignmember");
+    fetch("/assignmember")
+        .then(function(response) {
+            return response.text();
+        }).then(function(text) {
+        assignmember.innerHTML = text;
+    });
+
+</script>
+
+
+</body>
+</html>

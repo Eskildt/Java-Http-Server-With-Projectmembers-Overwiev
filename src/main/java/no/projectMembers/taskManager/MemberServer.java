@@ -25,12 +25,13 @@ public class MemberServer {
         dataSource.setUser(properties.getProperty("dataSource.username"));
         dataSource.setPassword(properties.getProperty("dataSource.password"));
 
+        Flyway.configure().dataSource(dataSource).load().clean();
         Flyway.configure().dataSource(dataSource).load().migrate();
 
         server = new HttpServer(port);
         server.setAssetRoot("src/main/resources/");
-        server.addController("/api/members", new MemberHttpController(new MemberDao(dataSource)));
-        server.addController("/api/projects", new ProjectsHttpController(new ProjectsDao(dataSource)));
+        server.addController("/members", new MemberHttpController(new MemberDao(dataSource)));
+        server.addController("/projects", new ProjectsHttpController(new ProjectsDao(dataSource)));
 
     }
 

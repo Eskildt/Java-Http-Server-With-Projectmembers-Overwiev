@@ -1,45 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <title>Maya og Eskilds web-applikasjon</title>
-    <link rel="stylesheet" type="text/css" href="style.css" /> 
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+    <title>Add project | KristianiaProject</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-<div id="app">
+<h1>Add project</h1>
 
-    <header>
-        <h1>ProjectManager</h1>
-    </header>
-    <main>
-        <task-table v-if="currentMain === 'tasks'" v-bind:tasks="tasks"></task-table>
-        </projects-table>
-        <projects-table v-else v-bind:projects="projects"></projects-table>
-    </main>
-    <aside>
+<form method="POST" action="/projects">
+    <label>Project Name: <input type="text" name="projectName" /></label>
+    <select name ="status" id="status">
+        <option value="To Do">To do</option>
+        <option value="Doing">Doing</option>
+        <option value="Done">Done</option>
+    </select>
+    <button>Add</button>
 
-        <h4>New Project</h4><br>
-        <form @submit="formSubmit">
-            <strong>Name:</strong>
-            <input type="text" class="form-control" v-model="name">
-            <strong>Description</strong>
-            <input type="text" class="form-control" v-model="description">
-            <strong>Status</strong>
-            <input type="text" class="form-control" v-model="status">
-            <button>Submit</button>
-        </form>
-        <button class="button" href="index.html">Create new Member</button>
-        <pre>
-       {{output}}
-      </pre>
-    </aside>
+</form>
 
+
+<div>
+    <a href="index.html">Return to front page</a>
 </div>
-<script src="newProject.js"></script>
-</body>
 
+<h2 id="projectsHeader">Registered tasks</h2>
+<div id="Projects"></div>
+
+<script>
+    fetch("/projects")
+        .then(function(response) {
+            return response.text();
+        }).then(function(text) {
+        document.getElementById("projects").innerHTML = text;
+    });
+</script>
+</body>
 </html>
