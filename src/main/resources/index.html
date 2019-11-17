@@ -1,99 +1,54 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Maya og Eskilds web-applikasjon</title>
-    <link rel="stylesheet" type="text/css" href="style.css" />
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+    <title>KristianiaProject</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-<div id="app">
-
-    <header>
-        <h1>ProjectManager</h1>
-        <h4> New project</h4>
-
-    </header>
-    <main>
-        <nav>
-            <ul>
-                <button class="button">
-                <li v-bind:class="{ active: currentMain == 'projects' }" v-on:click="currentMain = 'projects'; getData();">Projects</li>
-                </button>
-                <button class="button">
-                <li v-bind:class="{ active: currentMain == 'members' }" v-on:click="currentMain = 'members'; getData();">Members</li>
-                </button>
+<h1>Project view</h1>
 
 
-            </ul>
-        </nav>
-        <projects-table v-if="currentMain === 'projects'" v-bind:projects="projects"></projects-table>
-        </member-table>
-        <member-table v-else v-bind:members="members">
+<h2 id = "membersHeader">Registered members</h2>
+<div id="members"></div>
 
-        </member-table>
-    </main>
-    <aside>
+<h2 id="tasksHeader">Registered tasks</h2>
+<div id="tasks"></div>
 
 
-        <form @submit="formSubmit">
-            <div class="row">
-                <div class="col-25">
-                    <label for="name">Name</label>
-                </div>
-                <div class="col-75">
-                    <input type="text" id="name" name="name" placeholder="Enter name" v-model="name">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-25">
-                    <label for="email">Email</label>
-                </div>
-                <div class="col-75">
-                    <input type="email" id="email" name="email" placeholder="Enter Email" v-model="email">
-                </div>
-            </div><div class="row">
-                <div class="col-25">
-                    <label for="project">Project</label>
-                </div>
-                <div class="col-75">
-                    <input type="project" id="project" name="project" placeholder="Project Participating" v-model="project">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-25">
-                    <label for="category">Category</label>
-                </div>
-                <div class="col-75">
-                    <select id="category" name="category">
-                        <option value="coding">Coding</option>
-                        <option value="design">Style</option>
-                        <option value="management">Projectmanagement</option>
-                    </select>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-25">
-                    <label for="description">Description</label>
-                </div>
-                <div class="col-75">
-                    <textarea id="description" name="description" placeholder="Enter project description." style="height:200px"></textarea>
-                </div>
-            </div>
-            <div class="row">
-                <input type="submit" value="Add projects">
-            </div>
-        </form>
-        <div class="taskmeny">
-          <ul> <li><a href="newProject.html">Create Project</a></li>
-            <li><a href="alterTable.html">Make changes to table</a></li>
-              </ul>
-        </div>
-    </aside>
+<div>
+    <div id = "memberdiv">
+        <h2>Add members</h2>
+        <a href="newWorker.html" id="newWorkerLink">Add new task member</a>
+    </div>
+
+    <div id = "taskdiv">
+        <h2>Add tasks</h2>
+        <a href="newProject.html" id="newTaskLink">Add a new task</a>
+    </div>
+    <div id = "assigndiv">
+        <h2>Assign a member to a task</h2>
+        <a href="assignMemberToProject.html" id="assign">Assign Member To Tasks!</a>
+    </div>
 </div>
-<script type="module" src="./app.js"></script>
 </body>
+
+
+
+<script>
+    fetch("/members")
+        .then(function(response) {
+            return response.text();
+        }).then(function(text) {
+        document.getElementById("members").innerHTML = text;
+    });
+
+    fetch("/projects")
+        .then(function(response) {
+            return response.text();
+        }).then(function(text) {
+        document.getElementById("projects").innerHTML = text;
+    });
+</script>
 
 </html>

@@ -50,7 +50,6 @@ public class MemberDaoTest {
         Member member = new Member();
 
         member.setName(pickOneName(new String[] {"Bjørg", "Bjarne", "Bjarte", "Brage", "Britt", "Børge", "Borgar", "Bjørnar"}));
-        member.setEmail(pickOneEmail(new String[] {"Bjørg@strikkeklubben.no", "Bjarne@esso.no", "Bjarte@radioresepsjonen.no","Brage@drageklubben.com", "Britt@heimkunnskap.no", "Børge@hodejegerne.no", "Borgar@SopraSteria.no", "Bjørnar@bjørneparken.no"}));
         return member;
     }
 

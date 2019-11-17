@@ -4,18 +4,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
 import static no.projectMembers.http.HttpMessage.readHeaders;
 
 public class HttpServer {
+
+    private static final Logger Logger = LoggerFactory.getLogger(HttpServer.class);
+
 
     private ServerSocket serverSocket;
     private String assetRoot;
@@ -29,15 +28,10 @@ public class HttpServer {
         controllers.put("/echo", new EchoHttpController());
     }
 
-    public static void main(String[] args) throws IOException {
-        new HttpServer(8080).start();
-    }
-
     public void start() {
         new Thread(() -> run()).start();
+        Logger.info("Started on http//:localhost:{}", getPort());
     }
-
-    private static final Logger logger = LoggerFactory.getLogger(HttpServer.class);
 
     public void run() {
 
@@ -52,6 +46,8 @@ public class HttpServer {
                 String requestLine = HttpMessage.readLine(socket.getInputStream());
                 if (requestLine.isBlank()) continue;
 
+                Logger.debug("Handling request: {}", requestLine);
+
                 Map<String, String> headers = readHeaders(socket.getInputStream());
                 String body = HttpMessage.readBody(headers, socket.getInputStream());
                 String requestAction = requestLine.split(" ")[0];
@@ -62,30 +58,27 @@ public class HttpServer {
                 System.out.println(requestTarget);
                 Map<String, String> query = getQueryParameters(requestTarget);
 
-                controllers
-                        .getOrDefault(requestPath, defaultController)
+                controllers.getOrDefault(requestPath, defaultController)
                         .handle(requestAction, requestPath, query, body, socket.getOutputStream());
-                logger.info("Handling request {} {} ", requestAction, requestPath);
+
+                if(requestPath.equals("/stop")){
+                    System.exit(0);
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public static Map<String, String> getQueryParameters(String requestLine) {
-        String requestTarget;
-        if (requestLine.split(" ").length > 1) {
-            requestTarget = requestLine.split(" ")[1];
-        } else {
-            requestTarget = "/";
-        }
+    static Map<String, String> getQueryParameters(String requestTarget) {
         int questionPos = requestTarget.indexOf('?');
-        if (questionPos != -1) {
-            String queryString = requestTarget.substring(questionPos + 1);
-            return parseQueryString(queryString);
+        if (questionPos != -1){
+            String query = requestTarget.substring(questionPos+1);
+            return parseQueryString(query);
         }
         return new HashMap<>();
     }
+
 
     public static Map<String, String> parseQueryString(String queryString) {
         Map<String, String> parameters = new HashMap<>();
@@ -114,21 +107,5 @@ public class HttpServer {
 
     public void addController(String requestPath, HttpController controller) {
         controllers.put(requestPath, controller);
-    }
-
-    public static String decodeValue(String value) {
-        try {
-            return URLDecoder.decode(value, StandardCharsets.UTF_8.toString());
-        } catch (UnsupportedEncodingException ex) {
-            throw new RuntimeException(ex.getCause());
-        }
-    }
-
-    public static String encodeValue(String value) {
-        try {
-            return  URLEncoder.encode(value, StandardCharsets.UTF_8.toString());
-        } catch (UnsupportedEncodingException ex) {
-            throw new RuntimeException(ex.getCause());
-        }
     }
 }

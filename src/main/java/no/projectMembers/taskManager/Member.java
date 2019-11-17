@@ -4,15 +4,15 @@ import java.util.Objects;
 
 public class Member {
 
-    public String email;
     private String name;
-    public int id;
-    public String project;
+    public long id;
 
 
     @Override
     public String toString() {
-        return "{" + "id=" + id + ", name='" + name + '\'' + ", email='" + email + '\'' + ", project='" + project + '\'' + '}';
+        return "Member{" +
+                "name='" + name + '\'' +
+                '}';
     }
 
     @Override
@@ -20,10 +20,7 @@ public class Member {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Member member = (Member) o;
-        return id == member.id &&
-                Objects.equals(name, member.name) &&
-                Objects.equals(email, member.email) &&
-                Objects.equals(project, member.project);
+        return Objects.equals(name, member.name);
     }
 
     @Override
@@ -39,26 +36,11 @@ public class Member {
         return name;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-    public void setId(int id){
+    public void setId(long id){
         this.id = id;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
-    }
-
-    public void setProject(String project){
-        this.project = project;
-    }
-
-    public String getProject(){
-        return project;
     }
 }

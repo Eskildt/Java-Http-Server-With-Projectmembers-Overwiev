@@ -5,16 +5,14 @@ import java.util.Objects;
 public class Projects {
     private int id;
     private String name;
-    private String description;
     private String status;
 
     @Override
     public String toString() {
         return "Project{" +
-                "id=" + id +
+                ", id='" + id + '\'' +
                 ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", status=" + status +
+                ", status='" + status + '\'' +
                 '}';
     }
 
@@ -23,15 +21,12 @@ public class Projects {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Projects projects = (Projects) o;
-        return id == projects.id &&
-                status == projects.status &&
-                Objects.equals(name, projects.name) &&
-                Objects.equals(description, projects.description);
+        return Objects.equals(name, projects.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, status);
+        return Objects.hash(name);
     }
 
     public int getId() {
@@ -50,13 +45,6 @@ public class Projects {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     public String getStatus() {
         return status;

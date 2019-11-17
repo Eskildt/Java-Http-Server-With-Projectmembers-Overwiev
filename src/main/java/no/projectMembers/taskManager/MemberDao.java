@@ -14,28 +14,21 @@ public class MemberDao extends AbstractDao<Member> {
         super(dataSource);
     }
 
-    public long insert(Member member) throws SQLException {
-        return insert(member, "INSERT INTO members (NAME, EMAIL, PROJECT) VALUES (?, ?, ?)");
+    public void insert(Member member) throws SQLException {
+        long id = insert(member, "insert into members (name) values (?)");
+        member.setId(id);
     }
 
-    public long alter(Member member) throws SQLException{
-        return alter(member, "ALTER members (NAME, EMAIL, PROJECT) VALUES (?, ?, ?)");
-    }
 
     @Override
     protected void insertObject(Member member, PreparedStatement statement) throws SQLException {
         statement.setString(1, member.getName());
-        statement.setString(2, member.getEmail());
-        statement.setString(3, member.getProject());
     }
 
     @Override
     protected Member readObject(ResultSet resultSet) throws SQLException {
         Member member = new Member();
-        member.setId(resultSet.getInt("id"));
         member.setName(resultSet.getString("name"));
-        member.setEmail(resultSet.getString("email"));
-        member.setProject(resultSet.getString("project"));
 
         return member;
     }
@@ -54,6 +47,7 @@ public class MemberDao extends AbstractDao<Member> {
             }
         }
     }
+
 
     public List<Member> listAll() throws SQLException {
         return listAll("SELECT * FROM members");
