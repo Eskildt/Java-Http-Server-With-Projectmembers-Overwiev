@@ -1,7 +1,8 @@
-package no.projectMembers.taskManager;
+package no.projectMembers.taskManager.projects;
 
 import no.projectMembers.http.HttpController;
 import no.projectMembers.http.HttpServer;
+import no.projectMembers.taskManager.Decoder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,7 +26,6 @@ public class ProjectsHttpController implements HttpController{
         public void handle(String requestAction, String requestPath, Map<String, String> query, String requestBody, OutputStream outputStream) throws IOException {
             logger.info(requestAction);
             try {
-
                 if (requestAction.equals("POST")){
                     query = HttpServer.parseQueryString(requestBody);
                     Projects projects = new Projects();
@@ -46,7 +46,6 @@ public class ProjectsHttpController implements HttpController{
                 }
 
 
-                String status = "200";
                 String contentType = "text/html";
                 String body = getBody();
                 int contentLength = body.getBytes("UTF-8").length;

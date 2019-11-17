@@ -1,4 +1,4 @@
-package no.projectMembers.taskManager;
+package no.projectMembers.taskManager.member;
 
 import java.util.Objects;
 

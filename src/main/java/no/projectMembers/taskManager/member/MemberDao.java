@@ -1,4 +1,6 @@
-package no.projectMembers.taskManager;
+package no.projectMembers.taskManager.member;
+
+import no.projectMembers.taskManager.AbstractDao;
 
 import javax.sql.DataSource;
 import java.sql.Connection;

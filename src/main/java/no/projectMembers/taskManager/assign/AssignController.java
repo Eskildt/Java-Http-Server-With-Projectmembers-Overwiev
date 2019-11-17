@@ -1,43 +1,45 @@
-package no.projectMembers.taskManager;
+package no.projectMembers.taskManager.assign;
 
 import no.projectMembers.http.HttpController;
 import no.projectMembers.http.HttpServer;
+import no.projectMembers.taskManager.Decoder;
+import no.projectMembers.taskManager.member.MemberController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+public class AssignController implements HttpController {
 
-public class MemberHttpController implements HttpController {
 
-    private final MemberDao memberDao;
+    private AssignDao assignDao;
 
-    public MemberHttpController(MemberDao memberDao) {
-        this.memberDao = memberDao;
+    private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
+
+    public AssignController(AssignDao assignDao) {
+        this.assignDao = assignDao;
     }
 
-    private static final Logger logger = LoggerFactory.getLogger(HttpServer.class);
-
     @Override
-    public void handle(String requestAction, String requestPath, Map<String, String> query, String requestBody, OutputStream outputStream) throws IOException{
-
+    public void handle(String requestAction, String requestPath, Map<String, String> query, String requestBody, OutputStream outputStream) throws IOException {
 
         try {
             if (requestAction.equals("POST")){
                 query = HttpServer.parseQueryString(requestBody);
-                 Member member = new Member();
+                AssignMember assignMember = new AssignMember();
 
-                String tmpName = Decoder.decodeValue(query.get("memberName"));
+                String tmpProject = Decoder.decodeValue(query.get("projectid"));
+                String tmpMember = Decoder.decodeValue(query.get("memberid"));
 
-                member.setName(tmpName);
-                memberDao.insert(member);
+                assignMember.setProjects(tmpProject);
+                assignMember.setMember(tmpMember);
+                assignDao.insert(assignMember);
                 outputStream.write(("HTTP/1.1 302 Redirect\r\n" +
-                        "Location: http://localhost:8080/newWorker.html\r\n" +
+                        "Location: http://localhost:8080/assignMemberToProject.html\r\n" +
                         "Connection: close\r\n" +
                         "\r\n").getBytes());
                 return;
@@ -46,12 +48,12 @@ public class MemberHttpController implements HttpController {
             String status = "200";
             String contentType = "text/html";
             String body = getBody();
-            int contentLength = body.getBytes(StandardCharsets.UTF_8).length;
+            int contentLength = body.getBytes().length;
             outputStream.write(("HTTP/1.1 " + status + " OK\r\n" +
                     "content-type: " + contentType + "\r\n" +
                     "content-length: " + contentLength + "\r\n" +
                     "connection: close\r\n" + "\r\n" +
-                    body).getBytes(StandardCharsets.UTF_8));
+                    body).getBytes());
         } catch (SQLException e) {
             logger.error("While handling request {}", requestPath, e);
             String message = e.toString();
@@ -63,15 +65,10 @@ public class MemberHttpController implements HttpController {
         }
     }
 
-
     public String getBody() throws SQLException {
-        String body = memberDao.listAll().stream()
-                .map(p -> String.format("<option id='%s'>%s</option>", p.getId(), p.getName()))
+        String body = assignDao.listAll().stream()
+                .map(p -> String.format("<option value='%s'>Member: %s  |  Task: %s</option>", p.getId(), p.getMember(), p.getProjects()))
                 .collect(Collectors.joining(""));
         return body;
     }
-
 }
-
-
-

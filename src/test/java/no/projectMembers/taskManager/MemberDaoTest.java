@@ -1,5 +1,7 @@
 package no.projectMembers.taskManager;
 
+import no.projectMembers.taskManager.member.Member;
+import no.projectMembers.taskManager.member.MemberDao;
 import org.flywaydb.core.Flyway;
 import org.h2.jdbcx.JdbcDataSource;
 import org.junit.jupiter.api.BeforeEach;

@@ -15,7 +15,7 @@ body {
     top: 800px;
 }
 
-#tasks{
+#projects{
     position: absolute;
     left: 800px;
     top: 100px;
@@ -34,7 +34,7 @@ body {
     top: 50px;
 }
 
-#chooseATaskText{
+#chooseAProjectText{
     position: absolute;
     top: 50px;
     left: 800px;
@@ -57,7 +57,7 @@ body {
     top: 200px;
 }
 
-#taskdiv{
+#projectdiv{
     position: absolute;
     top: 300px;
 }
@@ -73,7 +73,7 @@ body {
     left: 350px;
 }
 
-#tasksHeader{
+#projectsHeader{
     position: absolute;
     top: 20px;
     left: 750px;

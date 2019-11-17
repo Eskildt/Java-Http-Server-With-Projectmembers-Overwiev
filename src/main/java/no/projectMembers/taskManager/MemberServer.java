@@ -1,6 +1,12 @@
 package no.projectMembers.taskManager;
 
 import no.projectMembers.http.HttpServer;
+import no.projectMembers.taskManager.assign.AssignController;
+import no.projectMembers.taskManager.assign.AssignDao;
+import no.projectMembers.taskManager.member.MemberDao;
+import no.projectMembers.taskManager.member.MemberController;
+import no.projectMembers.taskManager.projects.ProjectsDao;
+import no.projectMembers.taskManager.projects.ProjectsHttpController;
 import org.flywaydb.core.Flyway;
 import org.postgresql.ds.PGSimpleDataSource;
 
@@ -30,8 +36,9 @@ public class MemberServer {
 
         server = new HttpServer(port);
         server.setAssetRoot("src/main/resources/");
-        server.addController("/members", new MemberHttpController(new MemberDao(dataSource)));
+        server.addController("/members", new MemberController(new MemberDao(dataSource)));
         server.addController("/projects", new ProjectsHttpController(new ProjectsDao(dataSource)));
+        server.addController("/assignmember", new AssignController(new AssignDao(dataSource)));
 
     }
 

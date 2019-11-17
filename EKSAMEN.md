@@ -70,7 +70,7 @@ Brukervennlighet *er **ikke*** et vurderingskriterie for karakteren.
 <div id="projectMembers"></div>
 
 <div>
-    <a href="newWorker.html">Add new projects member</a>
+    <a href="newWorker.html">Add new projects no.projectMembers.taskManager.member</a>
 </div>
 </body>
 <script>
@@ -91,11 +91,11 @@ fetch("/projectMembers")
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Add projects member | KristianiaProject</title>
+    <title>Add projects no.projectMembers.taskManager.member | KristianiaProject</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<h1>Add projects member</h1>
+<h1>Add projects no.projectMembers.taskManager.member</h1>
 
 <form method="POST" action="/members">
     <label>Member name: <input type="text" name="full_name" /></label>
