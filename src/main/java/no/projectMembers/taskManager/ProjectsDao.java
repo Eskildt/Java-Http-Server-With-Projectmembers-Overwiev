@@ -33,7 +33,7 @@ public class ProjectsDao extends AbstractDao<Projects> {
     @Override
     protected Projects readObject(ResultSet resultSet) throws SQLException{
         Projects projects = new Projects();
-        projects.setName(resultSet.getString("Name"));
+        projects.setName(resultSet.getString("name"));
         projects.setStatus(resultSet.getString("Status"));
         return projects;
     }
