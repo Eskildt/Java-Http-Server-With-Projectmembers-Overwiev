@@ -14,15 +14,11 @@ public class ProjectsDao extends AbstractDao<Projects> {
         super(dataSource);
     }
 
-    public void insert(Projects project) throws SQLException{
-        insert(project, "INSERT INTO projects (NAME, DESCRIPTION, STATUS) VALUES (?, ?, ?)");
-    }
-
     @Override
-    protected void insertObject(Projects project, PreparedStatement statement) throws SQLException{
-        statement.setString(1, project.getName());
-        statement.setString(2, project.getDescription());
-        statement.setString(3, project.getStatus());
+    protected void insertObject(Projects projects, PreparedStatement statement) throws SQLException{
+        statement.setString(1, projects.getName());
+        statement.setString(2, projects.getDescription());
+        statement.setString(3, projects.getStatus());
     }
 
     public Projects retrieve(long id) throws SQLException {
@@ -39,6 +35,45 @@ public class ProjectsDao extends AbstractDao<Projects> {
             }
         }
     }
+
+    public Projects edit(long id, String name, String description, String status) throws SQLException {
+        try(Connection connection = dataSource.getConnection()){
+            try(PreparedStatement statement = connection.prepareStatement("DELETE projects SET name = ?, description = ?, status = ? WHERE id = ?")){
+                statement.setString(1, name);
+                statement.setString(2, description);
+                statement.setString(3, status);
+                statement.setLong(4, id);
+                try(ResultSet resultSet = statement.executeQuery()){
+                    if(resultSet.rowUpdated()){
+                        return readObject(resultSet);
+                        } else {
+                            return null;
+                        }
+                    }
+                }
+            }
+        }
+
+        public Projects delete(long id) throws SQLException {
+        try(Connection connection = dataSource.getConnection()){
+            try(PreparedStatement statement = connection.prepareStatement("DELETE FROM projects WHERE id = ?")){
+                statement.setLong(1, id);
+                try(ResultSet resultSet = statement.executeQuery()){
+                    if(resultSet.rowDeleted()){
+                        return readObject(resultSet);
+                    } else {
+                        return null;
+                    }
+                }
+            }
+        }
+    }
+
+    public void insert(Projects project) throws SQLException{
+        insert(project, "INSERT INTO projects (NAME, DESCRIPTION, STATUS) VALUES (?, ?, ?)");
+    }
+
+
 
     public List<Projects> listAll() throws SQLException {
         return listAll("SELECT * FROM projects");

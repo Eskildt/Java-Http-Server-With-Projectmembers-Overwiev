@@ -30,6 +30,7 @@ public class MemberServer {
         server = new HttpServer(port);
         server.setAssetRoot("src/main/resources/");
         server.addController("/api/members", new MemberHttpController(new MemberDao(dataSource)));
+        server.addController("/api/projects", new ProjectsHttpController(new ProjectsDao(dataSource)));
 
     }
 

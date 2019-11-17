@@ -53,7 +53,5 @@ public class HttpServerTest {
         HttpClient httpClient = new HttpClient("localhost", server.getPort(),"/mytestfile.txt");
         HttpClientResponse response = httpClient.execute();
         assertEquals("Hello Kristiania", response.getBody());
-
     }
-
 }

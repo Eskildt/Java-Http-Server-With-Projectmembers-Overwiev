@@ -1,4 +1,3 @@
-
 Vue.component("project-table", {
     props: ["projects"],
     template: `
@@ -35,7 +34,9 @@ new Vue({
     },
     methods: {
         getData: function() {
-            
+            axios
+                .get("http://localhost:8080/api/projects")
+                .then(response => (this.projects = response.data));
         },
         formSubmit(e) {
             e.preventDefault();
