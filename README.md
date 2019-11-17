@@ -12,24 +12,31 @@
 
 ### Funksjonalitet
 
-1. Skriv
-2. Et
-3. Kort
-4. Eksempel
-5. På
-6. Bruk
-7. Av
-8. Programmet
+programmet brukes for å holde oversikt mellom de forskjellige medlemene og deres arbeids oppgaver. 
+du kan legge til og se status på oppgaven, og legge til om den er under utvikling eller ferdig.
+
+programmet kjøres i index.html. Her er det linker til funkjsoner som å legge til oppgaver, medlemmer, velge medlemmer som
+skal ha en gitt oppgave og sette status på dem.
+programmet kjører alt ut i nettleseren gjennom en database slik at du kan se hva som ligger i databasen. 
+
 
 ## Designbeskrivelse
 
-Her kan dere inkludere et diagram av datamodellen og av de viktigste klassene i programmet.
+vi har designet oversikten slik at du enkelt kan legge til medlemmer du ønsker, gi dem en status 
+og lett hoppe mellom de forskjellige oppgavene samt statusene. 
+vi har forsøkt så langt det lar seg gjøre å holde koden ren, ryddig og oversiktelig med god navngvning.
 
-Beskrivelse av hvordan en habil ny utvikler som ser prosjektet for første gang bør forholde seg til koden deres.
 
 ## Egenevaluering
+vi har sammarbeidet godt gjennom prosjektet og har beholdt sammarbeidspartner fra innlevering nr2.
+vi fyller hverandre godt ut og har aldri sitti med samme problem for lenge. 
+selvom det har vert utfordringer underveis har vi vert flinke til å feilsøke samt funnet god veiledning 
+i felles elever og hverandre.
+
 
 ### Hva vi lærte underveis
+hvor viktig det er å gjennomføre tester samt hvor effektiv par-progrmering er. 
+Hvordan fire øyne ser bedre enn to og hvor smidig det gikk i forrhold til å bare være en. 
 
 ### Hva vi fikk til bra i koden vår
 
