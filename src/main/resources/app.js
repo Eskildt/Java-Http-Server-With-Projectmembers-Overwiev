@@ -17,6 +17,25 @@ Vue.component("member-table", {
       </tr>
     </table> 
   `
+});Vue.component("projects-table", {
+    props: ["projects"],
+    template: `
+<table> 
+      <h3>Projects:</h3>
+      <tr> 
+        <th>Id</th>
+        <th>Name</th>
+        <th>Description</th> 
+        <th>Status</th>
+      </tr>
+      <tr v-for="project in projects" @click="window.console.log(project.id)">
+        <td>{{projects.id}}</td>
+        <td>{{projects.name}}</td>
+        <td>{{projects.email}}</td>
+        <td>{{projects.project}}</td>
+      </tr>
+    </table> 
+  `
 });
 
 //Members Table
@@ -40,7 +59,7 @@ new Vue({
             axios
                 .get("http://localhost:8080/api/projects")
                 .then(response => (this.projects = response.data));
-        },
+            },
         formSubmit(e) {
             e.preventDefault();
             console.log(e.target.name);

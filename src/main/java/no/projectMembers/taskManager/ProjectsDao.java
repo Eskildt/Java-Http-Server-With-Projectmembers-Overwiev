@@ -27,7 +27,7 @@ public class ProjectsDao extends AbstractDao<Projects> {
 
     public Projects retrieve(long id) throws SQLException {
         try(Connection connection = dataSource.getConnection()){
-            try(PreparedStatement statement = connection.prepareStatement("SELECT * FROM members WHERE ID = ?")) {
+            try(PreparedStatement statement = connection.prepareStatement("SELECT * FROM projects WHERE ID = ?")) {
                 statement.setLong(1, id);
                 try(ResultSet resultSet = statement.executeQuery()) {
                     if(resultSet.next()) {
