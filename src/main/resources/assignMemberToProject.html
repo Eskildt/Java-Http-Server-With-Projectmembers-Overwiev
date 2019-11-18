@@ -2,16 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Assign a no.projectMembers.taskManager.member to a task | KristianiaProject</title>
+    <title>Assign a member to a project | KristianiaProject</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<h1>Assign a no.projectMembers.taskManager.member to a task</h1>
+<h1>Assign a member to a project</h1>
 
 
-<form method="POST" action="/assignmember">
+<form method="POST" action="/assignprojectmember">
     <label>
-        <h3 id = "chooseATaskText">Choose a task</h3>
+        <h3 id = "chooseAProjectText">Choose a project</h3>
         <select name ="projectid" id="projects">
         </select>
     </label>
@@ -43,8 +43,8 @@
 
 
 <script>
-    var tasks = document.getElementById("project");
-    fetch("/project")
+    var tasks = document.getElementById("projects");
+    fetch("/projects")
         .then(function(response) {
             return response.text();
         }).then(function(text) {

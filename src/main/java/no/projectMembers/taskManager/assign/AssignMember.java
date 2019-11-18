@@ -6,7 +6,7 @@ public class AssignMember {
 
 
     private long id;
-    private String task;
+    private String project;
     private String member;
 
     public long getId() {
@@ -17,12 +17,12 @@ public class AssignMember {
         this.id = id;
     }
 
-    public String getProjects() {
-        return task;
+    public String getProject() {
+        return project;
     }
 
-    public void setProjects(String task) {
-        this.task = task;
+    public void setProject(String project) {
+        this.project = project;
     }
 
     public String getMember() {
@@ -39,20 +39,20 @@ public class AssignMember {
         if (o == null || getClass() != o.getClass()) return false;
         AssignMember that = (AssignMember) o;
         return id == that.id &&
-                Objects.equals(task, that.task) &&
+                Objects.equals(project, that.project) &&
                 Objects.equals(member, that.member);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, task, member);
+        return Objects.hash(id, project, member);
     }
 
     @Override
     public String toString() {
         return "AssignMember{" +
                 "id=" + id +
-                ", task='" + task + '\'' +
+                ", task='" + project + '\'' +
                 ", member='" + member + '\'' +
                 '}';
     }
