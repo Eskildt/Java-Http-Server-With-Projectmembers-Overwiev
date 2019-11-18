@@ -131,7 +131,7 @@ body {
 * [ ] `README.md` beskriver prosjektets funksjonalitet, hvordan man bygger det og hvordan man kjører det 
 * [ ] `README.md` beskriver eventuell ekstra leveranse utover minimum
 * [ ] `README.md` inneholder link til en diagram som viser datamodellen
-* [ ] Dere har gitt minst 2 positive og 2 korrektive GitHub issues til en annen gruppe og inkluderer link til disse fra README.md
+* [x] Dere har gitt minst 2 positive og 2 korrektive GitHub issues til en annen gruppe og inkluderer link til disse fra README.md
 
 ### Koden
 
@@ -157,7 +157,7 @@ body {
 * [ ] Implementasjon av cookies for å konstruere sesjoner
 * [ ] UML diagram som dokumenterer datamodell og/eller arkitektur (presentert i README.md)
 * [ ] Rammeverk rundt Http-håndtering (en god HttpMessage class med HttpRequest og HttpResponse subtyper) som gjenspeiler RFC7230
-* [ ] Korrekt håndtering av norske tegn i HTTP
+* [x] Korrekt håndtering av norske tegn i HTTP
 * [x] God bruk av DAO-pattern
 * [ ] Link til video med god demonstrasjon av ping-pong programmering
 * [ ] Annet
