@@ -20,7 +20,7 @@ class FileHttpController implements HttpController {
     @Override
     public void handle(String requestAction, String requestPath, Map<String, String> query, String body, OutputStream outputStream) throws IOException {
 
-        File file = new File(httpServer.getAssetRoot() + requestPath);
+        File file = new File(httpServer.getFileLocation() + requestPath);
 
 
         logger.debug("Requesting file {}", file);

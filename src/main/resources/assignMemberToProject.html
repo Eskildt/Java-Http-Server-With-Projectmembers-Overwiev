@@ -29,7 +29,7 @@
 <form action ="">
     <label>
         <h3 id = "assignedMembersText">Tasks with assigned members</h3>
-        <div name ="" id="assignmember">
+        <div name ="" id="assignprojectmember">
         </div>
     </label>
 
@@ -43,12 +43,12 @@
 
 
 <script>
-    var tasks = document.getElementById("projects");
+    var projects = document.getElementById("projects");
     fetch("/projects")
         .then(function(response) {
             return response.text();
         }).then(function(text) {
-        tasks.innerHTML = text;
+        projects.innerHTML = text;
     });
 
 
@@ -61,12 +61,12 @@
     });
 
 
-    var assignmember = document.getElementById("assignprojectmember");
+    var assignprojectmember = document.getElementById("assignprojectmember");
     fetch("/assignprojectmember")
         .then(function(response) {
             return response.text();
         }).then(function(text) {
-        assignmember.innerHTML = text;
+        assignprojectmember.innerHTML = text;
     });
 
 </script>

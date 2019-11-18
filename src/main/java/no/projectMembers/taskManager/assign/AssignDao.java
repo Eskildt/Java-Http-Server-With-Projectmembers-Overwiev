@@ -16,7 +16,7 @@ public class AssignDao extends AbstractDao<AssignMember> {
 
 
     public void insert(AssignMember assignMember) throws SQLException {
-        long id = insert(assignMember, "INSERT INTO assignprojectmember (taskid, memberid) VALUES (?, ?)");
+        long id = insert(assignMember, "INSERT INTO assignprojectmember (projectid, memberid) VALUES (?, ?)");
         assignMember.setId(id);
     }
 

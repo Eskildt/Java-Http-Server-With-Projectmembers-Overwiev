@@ -17,9 +17,10 @@ public class MemberDao extends AbstractDao<Member> {
     }
 
     public void insert(Member member) throws SQLException {
-        long id = insert(member, "insert into members (name) values (?)");
+        long id = insert(member, "INSERT INTO members (name) VALUES (?)");
         member.setId(id);
     }
+
 
 
     @Override

@@ -14,7 +14,6 @@ public class HttpClientResponse extends HttpMessage {
 
         public HttpClientResponse(InputStream inputStream) throws IOException {
             this.statusLine = readLine(inputStream);
-            String headerLine;
 
             headers = readHeaders(inputStream);
 
@@ -22,8 +21,6 @@ public class HttpClientResponse extends HttpMessage {
         }
 
     public int getStatusCode(){ return Integer.parseInt(statusLine.split(" ")[1]); }
-
-        public Map<String, String> getHeaders() { return headers; }
 
         public String getBody() { return body; }
 

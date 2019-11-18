@@ -15,6 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class MemberDaoTest {
 
     private static Random random = new Random();
+    private JdbcDataSource dataSource;
     private MemberDao dao;
 
     @BeforeEach
@@ -40,14 +41,6 @@ public class MemberDaoTest {
     }
 
     @Test
-    public void shouldRetrieveSavedMember() throws SQLException{
-        Member member = sampleMember();
-        dao.insert(member);
-        assertThat(member).hasNoNullFieldsOrProperties();
-        assertThat(dao.retrieve(member.getId())).isEqualToComparingFieldByField(member);
-    }
-
-    @Test
     static Member sampleMember(){
         Member member = new Member();
 
@@ -57,11 +50,6 @@ public class MemberDaoTest {
 
 
     static String pickOneName(String[] alternatives) {
-
-        return alternatives[random.nextInt(alternatives.length)];
-    }
-
-    static String pickOneEmail(String[] alternatives) {
 
         return alternatives[random.nextInt(alternatives.length)];
     }

@@ -17,7 +17,7 @@ public class HttpServer {
 
 
     private ServerSocket serverSocket;
-    private String assetRoot;
+    private String fileLocation;
 
     private HttpController defaultController = new FileHttpController(this);
 
@@ -97,12 +97,13 @@ public class HttpServer {
         return serverSocket.getLocalPort();
     }
 
-    public void setAssetRoot(String assetRoot) {
-        this.assetRoot = assetRoot;
+    public void setFileLocation(String fileLocation) {
+        this.fileLocation = fileLocation;
     }
 
-    public String getAssetRoot() {
-        return assetRoot;
+
+    public String getFileLocation() {
+        return fileLocation;
     }
 
     public void addController(String requestPath, HttpController controller) {
