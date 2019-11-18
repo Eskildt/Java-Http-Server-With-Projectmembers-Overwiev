@@ -43,14 +43,12 @@ public class MemberDaoTest {
     @Test
     static Member sampleMember(){
         Member member = new Member();
-
         member.setName(pickOneName(new String[] {"Bjørg", "Bjarne", "Bjarte", "Brage", "Britt", "Børge", "Borgar", "Bjørnar"}));
         return member;
     }
 
 
-    static String pickOneName(String[] alternatives) {
-
+     private static String pickOneName(String[] alternatives) {
         return alternatives[random.nextInt(alternatives.length)];
     }
 }

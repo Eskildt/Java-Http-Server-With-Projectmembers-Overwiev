@@ -39,9 +39,25 @@ hvor viktig det er å gjennomføre tester samt hvor effektiv par-progrmering er.
 Hvordan fire øyne ser bedre enn to og hvor smidig det gikk i forrhold til å bare være en. 
 
 ### Hva vi fikk til bra i koden vår
+Føler vi fikk god struktur på koden vår, spesielt da classene. De er oversiktlige og lette å lese.
 
 ### Hva vi skulle ønske vi hadde gjort annerledes
+Vi skulle ønske vi fikk satt av mer tid til oppgaven. Desverre er det i år litt tett mellom eksamenene og da fikk vi ikke tid til alt vi skulle ønske.
 
 ## Evaluering fra annen gruppe
+https://github.com/Westerdals/pgr203-2019-eksamen-Eskildt/issues
+
+* Flere tester i MemberHttpControllerTest
+* Bra med funksjonalitet
+* Ryddig kodestruktur
+* Hadde vært fint med hyperlink til localhost
 
 ## Evaluering gitt til annen gruppe
+https://github.com/Westerdals/pgr203-2019-eksamen-Blixits/issues
+
+* God mengde tester
+* God kodestruktur og navngivning
+* Tabellene inneholder flere kolonner enn nødvendig
+* Mulig med mer oversiktlige classes
+* Får ikke opp tasks
+* Feil properties
