@@ -9,7 +9,6 @@ import no.projectMembers.taskManager.projects.ProjectsDao;
 import no.projectMembers.taskManager.projects.ProjectsHttpController;
 import org.flywaydb.core.Flyway;
 import org.postgresql.ds.PGSimpleDataSource;
-import org.slf4j.LoggerFactory;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -44,9 +43,6 @@ public class MemberServer {
         server.addController("/assignprojectmember", new AssignController(new AssignDao(dataSource)));
 
     }
-
-    private static final org.slf4j.Logger Logger = LoggerFactory.getLogger(MemberServer.class);
-
     public static void main(String[] args) throws IOException {
         new MemberServer(8080).start();
     }
