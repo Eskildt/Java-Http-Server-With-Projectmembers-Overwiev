@@ -12,31 +12,31 @@
 
 ### Funksjonalitet
 
-programmet brukes for å holde oversikt mellom de forskjellige medlemene og deres arbeids oppgaver. 
-du kan legge til og se status på oppgaven, og legge til om den er under utvikling eller ferdig.
+Programmet brukes for å holde oversikt mellom de forskjellige medlemene og deres arbeids oppgaver. 
+Du kan legge til og se status på oppgaven, og legge til om den er under utvikling eller ferdig.
 
-programmet kjøres i index.html. Her er det linker til funkjsoner som å legge til oppgaver, medlemmer, velge medlemmer som
+Programmet kjøres i index.html. Her er det linker til funkjsoner som å legge til oppgaver, medlemmer, velge medlemmer som
 skal ha en gitt oppgave og sette status på dem.
-programmet kjører alt ut i nettleseren gjennom en database slik at du kan se hva som ligger i databasen. 
+Programmet kjører alt ut i nettleseren gjennom en database slik at du kan se hva som ligger i databasen. 
 
 
 ## Designbeskrivelse
 
-vi har designet oversikten slik at du enkelt kan legge til medlemmer du ønsker, gi dem en status 
+Vi har designet oversikten slik at du enkelt kan legge til medlemmer du ønsker, gi dem en status 
 og lett hoppe mellom de forskjellige oppgavene samt statusene. 
-vi har forsøkt så langt det lar seg gjøre å holde koden ren, ryddig og oversiktelig med god navngvning.
+Vi har forsøkt så langt det lar seg gjøre å holde koden ren, ryddig og oversiktelig med god navngvning.
 
 ![Design](./doc/UMLdiagram.png)
 
 ## Egenevaluering
-vi har sammarbeidet godt gjennom prosjektet og har beholdt sammarbeidspartner fra innlevering nr2.
-vi fyller hverandre godt ut og har aldri sitti med samme problem for lenge. 
-selvom det har vert utfordringer underveis har vi vert flinke til å feilsøke samt funnet god veiledning 
+Vi har sammarbeidet godt gjennom prosjektet og har beholdt sammarbeidspartner fra innlevering nr2.
+Vi fyller hverandre godt ut og har aldri sitti med samme problem for lenge. 
+Selvom det har vert utfordringer underveis har vi vert flinke til å feilsøke samt funnet god veiledning 
 i felles elever og hverandre.
 
 
 ### Hva vi lærte underveis
-hvor viktig det er å gjennomføre tester samt hvor effektiv par-progrmering er. 
+Hvor viktig det er å gjennomføre tester samt hvor effektiv par-progrmering er. 
 Hvordan fire øyne ser bedre enn to og hvor smidig det gikk i forrhold til å bare være en. 
 
 ### Hva vi fikk til bra i koden vår

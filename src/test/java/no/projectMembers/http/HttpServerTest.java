@@ -32,8 +32,7 @@ public class HttpServerTest {
         HttpClient client = new HttpClient("localhost", server.getPort(), "/echo?status=401");
         assertEquals(401, client.execute().getStatusCode());
     }
-
-
+    
     @Test
     void shouldReturnFileFromDisk() throws IOException {
         Files.writeString(Paths.get("target/mytestfile.txt"), "Hello Kristiania");
