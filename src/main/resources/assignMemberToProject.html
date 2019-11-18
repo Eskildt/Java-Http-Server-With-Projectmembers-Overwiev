@@ -43,12 +43,12 @@
 
 
 <script>
-    var projects = document.getElementById("projects");
+    var tasks = document.getElementById("projects");
     fetch("/projects")
         .then(function(response) {
             return response.text();
         }).then(function(text) {
-        projects.innerHTML = text;
+        tasks.innerHTML = text;
     });
 
 
@@ -61,12 +61,12 @@
     });
 
 
-    var assignprojectmember = document.getElementById("assignprojectmember");
+    var assignmember = document.getElementById("assignprojectmember");
     fetch("/assignprojectmember")
         .then(function(response) {
             return response.text();
         }).then(function(text) {
-        assignprojectmember.innerHTML = text;
+        assignmember.innerHTML = text;
     });
 
 </script>

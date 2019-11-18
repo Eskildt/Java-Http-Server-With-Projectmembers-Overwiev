@@ -51,20 +51,25 @@ body {
     top: 100px;
     left: 1000px;
 }
+#taskdiv{
+    position: absolute;
+    top:200px;
+}
 
 #memberdiv{
     position: absolute;
-    top: 200px;
+    top: 400px;
+
 }
 
 #projectdiv{
     position: absolute;
-    top: 300px;
+    top: 600px;
 }
 
 #assigndiv{
     position: absolute;
-    top: 100px;
+    top: 600px;
 }
 
 #membersHeader{
@@ -77,4 +82,34 @@ body {
     position: absolute;
     top: 20px;
     left: 750px;
+}
+.button{
+    background-color: gray;
+    border: none;
+    color: white;
+    padding: 10px 5px;
+    display: inline-block;
+    font-size: 15px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+.a{
+    text-decoration: none;
+}
+
+#newTaskLink{
+    color:white;
+}
+#newWorkerLink{
+   color:white;
+}
+#assign{
+   color: white;
+}
+#returnlink{
+    color:white;
+}
+#return{
+    color:white;
 }
