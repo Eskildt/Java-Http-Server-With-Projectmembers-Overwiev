@@ -26,6 +26,7 @@ vi har designet oversikten slik at du enkelt kan legge til medlemmer du ønsker,
 og lett hoppe mellom de forskjellige oppgavene samt statusene. 
 vi har forsøkt så langt det lar seg gjøre å holde koden ren, ryddig og oversiktelig med god navngvning.
 
+![Design](./doc/UMLdiagram.png)
 
 ## Egenevaluering
 vi har sammarbeidet godt gjennom prosjektet og har beholdt sammarbeidspartner fra innlevering nr2.

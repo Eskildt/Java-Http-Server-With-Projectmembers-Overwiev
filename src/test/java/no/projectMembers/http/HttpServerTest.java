@@ -33,11 +33,6 @@ public class HttpServerTest {
         assertEquals(401, client.execute().getStatusCode());
     }
 
-    @Test
-    void shouldReturnBody() throws IOException {
-        HttpClient client = new HttpClient("localhost", server.getPort(), "/echo?body=HelloWorld!");
-        assertEquals("HelloWorld!", client.execute().getBody());
-    }
 
     @Test
     void shouldReturnFileFromDisk() throws IOException {
