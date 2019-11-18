@@ -35,7 +35,7 @@ public class AssignController implements HttpController {
                 String tmpProject = Decoder.decodeValue(query.get("projectid"));
                 String tmpMember = Decoder.decodeValue(query.get("memberid"));
 
-                assignMember.setProjects(tmpProject);
+                assignMember.setProject(tmpProject);
                 assignMember.setMember(tmpMember);
                 assignDao.insert(assignMember);
                 outputStream.write(("HTTP/1.1 302 Redirect\r\n" +
@@ -67,7 +67,7 @@ public class AssignController implements HttpController {
 
     public String getBody() throws SQLException {
         String body = assignDao.listAll().stream()
-                .map(p -> String.format("<option value='%s'>Member: %s  |  Task: %s</option>", p.getId(), p.getMember(), p.getProjects()))
+                .map(p -> String.format("<option value='%s'>Member: %s  |  Task: %s</option>", p.getId(), p.getMember(), p.getProject()))
                 .collect(Collectors.joining(""));
         return body;
     }

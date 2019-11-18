@@ -24,7 +24,7 @@ public class AssignDao extends AbstractDao<AssignMember> {
     @Override
     protected void insertObject(AssignMember assignMember, PreparedStatement statement) throws SQLException {
 
-        statement.setString(1, assignMember.getProjects());
+        statement.setString(1, assignMember.getProject());
         statement.setString(2, assignMember.getMember());
     }
 
@@ -36,7 +36,7 @@ public class AssignDao extends AbstractDao<AssignMember> {
     protected AssignMember readObject(ResultSet resultSet) throws SQLException {
         AssignMember assignMember = new AssignMember();
         assignMember.setId(resultSet.getLong("id"));
-        assignMember.setProjects(resultSet.getString("projectid"));
+        assignMember.setProject(resultSet.getString("projectid"));
         assignMember.setMember(resultSet.getString("memberid"));
 
         return assignMember;
