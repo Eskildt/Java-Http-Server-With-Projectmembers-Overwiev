@@ -51,7 +51,7 @@ body {
     top: 100px;
     left: 1000px;
 }
-#taskdiv{
+#projectsdiv{
     position: absolute;
     top:200px;
 }
@@ -98,7 +98,7 @@ body {
     text-decoration: none;
 }
 
-#newTaskLink{
+#newProjectsLink{
     color:white;
 }
 #newWorkerLink{
