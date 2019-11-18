@@ -4,11 +4,20 @@
 
 ## Hvordan kjøre dette programmet
 
+Man kan enten kjøre jar filen for å få programmet til å kjøre, eller bruke MemberServer.
+Programmet kjører på localhost:8080.
+Vil man kjøre med jar filen skriver man i terminalen: java -jar /Users/eskildtangen/Downloads/pgr203-2019-eksamen-Eskildt/target/projects-manager-1.0-SNAPSHOT-shaded.jar
+
+
 ### Bygg og test executable jar-fil
 
 1. Hvilken kommando skal man kjøre?
+    Åpne Maven og kjør Package, når det er gjort skriver man i terminalen: java -jar /Users/eskildtangen/Downloads/pgr203-2019-eksamen-Eskildt/target/projects-manager-1.0-SNAPSHOT-shaded.jar
 2. Hvordan skal konfigurasjonsfilen opprettes?
+    Mavens konfigurasjons fil burde ikke ligge ved til noe spesifikt prosjekt, men pom.xml filen burde derimot det.
+    Settings.xml inneholder informasjon om lokalt repository lokasjon og passord/brukernavn.
 3. Hvordan startet du programmet?
+    Man kan kjøre jar filen, men det enkleste vil være å starte MemberServer og la flyway ta deg resten av veien.
 
 ### Funksjonalitet
 
@@ -43,9 +52,10 @@ Hvordan fire øyne ser bedre enn to og hvor smidig det gikk i forrhold til å ba
 Føler vi fikk god struktur på koden vår, spesielt da classene. De er oversiktlige og lette å lese.
 
 ### Hva vi skulle ønske vi hadde gjort annerledes
-Vi skulle ønske vi fikk satt av mer tid til oppgaven. Desverre er det i år litt tett mellom eksamenene og da fikk vi ikke tid til alt vi skulle ønske.
+Vi skulle ønske vi fikk satt av enda litt mer tid til oppgaven. Desverre er det i år litt tett mellom eksamenene og da fikk vi ikke tid til alt vi skulle ønske.
 
 ## Evaluering fra annen gruppe
+#### Evaluering fra gruppen vi avtalte med:
 https://github.com/Westerdals/pgr203-2019-eksamen-Eskildt/issues
 
 * Flere tester i MemberHttpControllerTest
@@ -53,7 +63,18 @@ https://github.com/Westerdals/pgr203-2019-eksamen-Eskildt/issues
 * Ryddig kodestruktur
 * Hadde vært fint med hyperlink til localhost
 
+#### Evaluering fra gruppen som ikke hadde noen å ta evaluering med:
+https://github.com/Westerdals/pgr203-2019-eksamen-Eskildt/issues
+
+* Lite info om member
+* Kan ikke se prosjekt og tilkoblede medlemmer på forsiden
+* Enkel å forståelig frontend
+* Veldig bra mappe og kodestruktur
+
+
+
 ## Evaluering gitt til annen gruppe
+#### Evaluering gitt til gruppen vi avtalte med:
 https://github.com/Westerdals/pgr203-2019-eksamen-Blixits/issues
 
 * God mengde tester
@@ -62,3 +83,16 @@ https://github.com/Westerdals/pgr203-2019-eksamen-Blixits/issues
 * Mulig med mer oversiktlige classes
 * Får ikke opp tasks
 * Feil properties
+
+#### Evaluering gitt til gruppen som ikke hadde noen å ta evaluering med:
+https://github.com/Westerdals/pgr203-2019-eksamen-Hurbra/issues
+
+* God navngivning og kodestruktur
+* Mange og gode tester
+* Unødvendig tungvint sql
+* Får Java heap space error
+
+
+
+
+
